@@ -1,0 +1,1049 @@
+{
+  "metadata": {
+    "standard": "CIS AWS Foundations Benchmark",
+    "version": "1.4.0",
+    "source": "AWS Security Hub",
+    "created": "2026-04-07",
+    "tools": ["Checkov", "Trivy", "KICS", "Prowler"],
+    "terraform_provider": "hashicorp/aws",
+    "notes": "Rule IDs marked as CHANGE_<TOOL>_<TAG> require local verification by running the tool against a sample vulnerable Terraform file and inspecting JSON output. Prowler check IDs follow the pattern used in --compliance cis_1.4_aws mode."
+  },
+  "controls": [
+    {
+      "cis_id": "IAM.1",
+      "section": "IAM",
+      "level": 1,
+      "description": "IAM policies should not allow full '*' administrative privileges",
+      "terraform_resource": ["aws_iam_policy", "aws_iam_policy_document"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": "CKV_AWS_1",
+        "resource": "aws_iam_policy_document",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0057",
+        "resource": "aws_iam_policy",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "b4378389-a9aa-44ee-91e7-ef183f11079e",
+        "query_name": "IAM Policies With Full Privileges",
+        "confidence": "verified"
+      },
+      "prowler": {
+        "check_id": "iam_policy_no_full_access_wildcard_attached",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "IAM.15",
+      "section": "IAM",
+      "level": 1,
+      "description": "Ensure IAM password policy requires minimum password length of 14 or greater",
+      "terraform_resource": ["aws_iam_account_password_policy"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": "CKV_AWS_9",
+        "resource": "aws_iam_account_password_policy",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0056",
+        "resource": "aws_iam_account_password_policy",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "9ed08290-b951-4471-bde9-6f667f032abc",
+        "query_name": "IAM Password Without Minimum Length",
+        "confidence": "verified"
+      },
+      "prowler": {
+        "check_id": "iam_password_policy_minimum_length_14",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "IAM.16",
+      "section": "IAM",
+      "level": 1,
+      "description": "Ensure IAM password policy prevents password reuse",
+      "terraform_resource": ["aws_iam_account_password_policy"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": "CKV_AWS_13",
+        "resource": "aws_iam_account_password_policy",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0056",
+        "resource": "aws_iam_account_password_policy",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_IAM.16",
+        "query_name": "IAM Password Reuse Prevention",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "iam_password_policy_reuse_24",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "IAM.18",
+      "section": "IAM",
+      "level": 1,
+      "description": "Ensure a support role has been created to manage incidents with AWS Support",
+      "terraform_resource": ["aws_iam_role", "aws_iam_role_policy_attachment"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": "CKV_AWS_274",
+        "resource": "aws_iam_role_policy_attachment",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_IAM.18",
+        "resource": "aws_iam_role_policy_attachment",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_IAM.18",
+        "query_name": "Support Role Not Created",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "iam_support_role_created",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "IAM.3",
+      "section": "IAM",
+      "level": 1,
+      "description": "IAM users' access keys should be rotated every 90 days or less",
+      "terraform_resource": ["aws_iam_access_key"],
+      "iac_testable": false,
+      "operationally_testable": true,
+      "iac_limitation": "Operational state — key rotation age cannot be determined from Terraform code",
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": null,
+        "confidence": "not_applicable"
+      },
+      "trivy": {
+        "rule_id": null,
+        "confidence": "not_applicable"
+      },
+      "kics": {
+        "rule_id": null,
+        "confidence": "not_applicable"
+      },
+      "prowler": {
+        "check_id": "iam_rotate_access_key_90_days",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "IAM.5",
+      "section": "IAM",
+      "level": 1,
+      "description": "MFA should be enabled for all IAM users that have a console password",
+      "terraform_resource": ["aws_iam_user_login_profile"],
+      "iac_testable": false,
+      "operationally_testable": true,
+      "iac_limitation": "MFA device association is an operational state — Terraform can create login profiles but cannot enforce MFA enrollment",
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": "CKV_AWS_40",
+        "resource": "aws_iam_user",
+        "confidence": "partial"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0123",
+        "resource": "aws_iam_user",
+        "confidence": "partial"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_IAM.5",
+        "query_name": "MFA Not Enabled For IAM User",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "iam_user_mfa_enabled_console_access",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "IAM.22",
+      "section": "IAM",
+      "level": 1,
+      "description": "IAM user credentials unused for 45 days should be removed",
+      "terraform_resource": [],
+      "iac_testable": false,
+      "operationally_testable": true,
+      "iac_limitation": "Operational state — last used date cannot be determined from Terraform code",
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": null,
+        "confidence": "not_applicable"
+      },
+      "trivy": {
+        "rule_id": null,
+        "confidence": "not_applicable"
+      },
+      "kics": {
+        "rule_id": null,
+        "confidence": "not_applicable"
+      },
+      "prowler": {
+        "check_id": "iam_user_credentials_unused_45_days_console_access",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "S3.1",
+      "section": "S3",
+      "level": 2,
+      "description": "S3 general purpose buckets should have block public access settings enabled",
+      "terraform_resource": ["aws_s3_bucket_public_access_block"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": ["CKV_AWS_53", "CKV_AWS_54", "CKV_AWS_55", "CKV_AWS_56"],
+        "resource": "aws_s3_bucket_public_access_block",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": ["AVD-AWS-0086", "AVD-AWS-0087"],
+        "resource": "aws_s3_bucket_public_access_block",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "1a4bc881-9f69-4d44-8c9a-d37d08f54c55",
+        "query_name": "S3 Bucket Block Public Access Disabled",
+        "confidence": "verified"
+      },
+      "prowler": {
+        "check_id": "s3_bucket_level_public_access_block",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "S3.5",
+      "section": "S3",
+      "level": 1,
+      "description": "S3 general purpose buckets should require requests to use SSL",
+      "terraform_resource": ["aws_s3_bucket_policy"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": "CKV_AWS_70",
+        "resource": "aws_s3_bucket_policy",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0088",
+        "resource": "aws_s3_bucket_policy",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "4bc4dd4c-7d8d-405e-a0fb-57fa4c31b4d9",
+        "query_name": "S3 Bucket Policy Accepts HTTP Requests",
+        "confidence": "verified"
+      },
+      "prowler": {
+        "check_id": "s3_bucket_secure_transport_policy",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "S3.8",
+      "section": "S3",
+      "level": 2,
+      "description": "S3 general purpose buckets should block public access",
+      "terraform_resource": ["aws_s3_bucket_public_access_block"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": "CKV2_AWS_6",
+        "resource": "aws_s3_bucket_public_access_block",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0086",
+        "resource": "aws_s3_bucket_public_access_block",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "1a4bc881-9f69-4d44-8c9a-d37d08f54c55",
+        "query_name": "S3 Bucket Block Public Access Disabled",
+        "confidence": "verified"
+      },
+      "prowler": {
+        "check_id": "s3_bucket_public_access_block_bucket_settings",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "S3.20",
+      "section": "S3",
+      "level": 2,
+      "description": "S3 general purpose buckets should have MFA delete enabled",
+      "terraform_resource": ["aws_s3_bucket_versioning"],
+      "iac_testable": false,
+      "operationally_testable": true,
+      "iac_limitation": "MFA Delete requires root account with MFA — cannot be configured via standard Terraform provider",
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": "CKV_AWS_300",
+        "resource": "aws_s3_bucket_versioning",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0089",
+        "resource": "aws_s3_bucket_versioning",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_S3.20",
+        "query_name": "S3 MFA Delete Disabled",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "s3_bucket_mfa_delete_enabled",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudTrail.1",
+      "section": "Logging",
+      "level": 1,
+      "description": "CloudTrail should be enabled and configured with at least one multi-Region trail that includes read and write management events",
+      "terraform_resource": ["aws_cloudtrail"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "medium",
+      "cost_note": "CloudTrail multi-region begins logging immediately. Stop logging before destroy.",
+      "checkov": {
+        "rule_id": "CKV_AWS_67",
+        "resource": "aws_cloudtrail",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": ["AVD-AWS-0014", "AVD-AWS-0015"],
+        "resource": "aws_cloudtrail",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "8173d5eb-96b5-4aa6-a71b-ecfa153c123d",
+        "query_name": "CloudTrail Multi Region Disabled",
+        "confidence": "verified"
+      },
+      "prowler": {
+        "check_id": "cloudtrail_multi_region_enabled",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudTrail.2",
+      "section": "Logging",
+      "level": 2,
+      "description": "CloudTrail should have encryption at-rest enabled",
+      "terraform_resource": ["aws_cloudtrail", "aws_kms_key"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "high",
+      "cost_note": "KMS key costs $1.00/month billed per started month. Always destroy promptly.",
+      "checkov": {
+        "rule_id": "CKV_AWS_35",
+        "resource": "aws_cloudtrail",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0016",
+        "resource": "aws_cloudtrail",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "ebb2e9c3-1fbd-4a74-a0bf-b2fd0671c1e3",
+        "query_name": "CloudTrail Not Encrypted",
+        "confidence": "verified"
+      },
+      "prowler": {
+        "check_id": "cloudtrail_kms_encryption_enabled",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudTrail.4",
+      "section": "Logging",
+      "level": 2,
+      "description": "CloudTrail log file validation should be enabled",
+      "terraform_resource": ["aws_cloudtrail"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "medium",
+      "cost_note": "Depends on CloudTrail being active. Stop logging before destroy.",
+      "checkov": {
+        "rule_id": "CKV_AWS_36",
+        "resource": "aws_cloudtrail",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0019",
+        "resource": "aws_cloudtrail",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "3e2d3b2f-c22a-4df1-9cc6-a7a0aebb0c99",
+        "query_name": "CloudTrail Log File Validation Disabled",
+        "confidence": "verified"
+      },
+      "prowler": {
+        "check_id": "cloudtrail_log_file_validation_enabled",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudTrail.5",
+      "section": "Logging",
+      "level": 1,
+      "description": "CloudTrail trails should be integrated with Amazon CloudWatch Logs",
+      "terraform_resource": ["aws_cloudtrail", "aws_cloudwatch_log_group", "aws_iam_role"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "medium",
+      "cost_note": "CloudWatch Logs ingestion $0.50/GB. Minimal at test scale.",
+      "checkov": {
+        "rule_id": "CKV_AWS_67",
+        "resource": "aws_cloudtrail",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0014",
+        "resource": "aws_cloudtrail",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "8173d5eb-96b5-4aa6-a71b-ecfa153c123d",
+        "query_name": "CloudTrail Multi Region Disabled",
+        "confidence": "partial",
+        "note": "KICS checks multi-region flag but may not specifically check CloudWatch Logs integration — verify locally"
+      },
+      "prowler": {
+        "check_id": "cloudtrail_cloudwatch_logging_enabled",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudTrail.6",
+      "section": "Logging",
+      "level": 1,
+      "description": "Ensure the S3 bucket used to store CloudTrail logs is not publicly accessible",
+      "terraform_resource": ["aws_s3_bucket_public_access_block"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "cost_note": "S3 bucket only — negligible cost.",
+      "checkov": {
+        "rule_id": ["CKV_AWS_53", "CKV_AWS_54", "CKV_AWS_55", "CKV_AWS_56"],
+        "resource": "aws_s3_bucket_public_access_block",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0086",
+        "resource": "aws_s3_bucket_public_access_block",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "1a4bc881-9f69-4d44-8c9a-d37d08f54c55",
+        "query_name": "S3 Bucket Block Public Access Disabled",
+        "confidence": "verified"
+      },
+      "prowler": {
+        "check_id": "cloudtrail_s3_bucket_is_not_publicly_accessible",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudTrail.7",
+      "section": "Logging",
+      "level": 2,
+      "description": "Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket",
+      "terraform_resource": ["aws_s3_bucket_logging"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "cost_note": "Access logs generate additional S3 objects. Use force_destroy=true on test buckets.",
+      "checkov": {
+        "rule_id": "CKV_AWS_18",
+        "resource": "aws_s3_bucket",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0089",
+        "resource": "aws_s3_bucket_logging",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "a227ec01-f97a-4084-91a4-47b350c1db54",
+        "query_name": "S3 Bucket Logging Disabled",
+        "confidence": "verified"
+      },
+      "prowler": {
+        "check_id": "cloudtrail_s3_bucket_access_logging_enabled",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "Config.1",
+      "section": "Logging",
+      "level": 1,
+      "description": "AWS Config should be enabled and use the service-linked role for resource recording",
+      "terraform_resource": ["aws_config_configuration_recorder", "aws_config_delivery_channel"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "medium",
+      "cost_note": "$0.003 per configuration item recorded. Stop recorder before destroy.",
+      "checkov": {
+        "rule_id": "CKV_AWS_121",
+        "resource": "aws_config_configuration_recorder",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_Config.1",
+        "resource": "aws_config_configuration_recorder",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_Config.1",
+        "query_name": "Config Recorder Disabled",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "config_recorder_all_regions_enabled",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "KMS.4",
+      "section": "Logging",
+      "level": 2,
+      "description": "AWS KMS key rotation should be enabled",
+      "terraform_resource": ["aws_kms_key"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "high",
+      "cost_note": "$1.00/month per KMS key billed per started month. Always destroy promptly.",
+      "checkov": {
+        "rule_id": "CKV_AWS_7",
+        "resource": "aws_kms_key",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0065",
+        "resource": "aws_kms_key",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "7c0f8b5a-2d4e-4f1c-9a3b-6e8d2c7f4e1a",
+        "query_name": "KMS Key Rotation Disabled",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "kms_cmk_rotation_enabled",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudWatch.1",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "A log metric filter and alarm should exist for usage of the 'root' user",
+      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "cost_note": "CloudWatch Alarm $0.10/month. Negligible at test scale.",
+      "structural_note": "Shift-left tools detect absence of metric filter/alarm resources — structural weakness of IaC scanning for this entire section.",
+      "checkov": {
+        "rule_id": "CKV_AWS_97",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "partial",
+        "note": "CKV_AWS_97 covers all CloudWatch.x controls generically — does not distinguish individual CIS sub-controls"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_CloudWatch.1",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_CloudWatch.1",
+        "query_name": "CloudWatch Alarm For Root Login",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "cloudwatch_log_metric_filter_root_usage",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudWatch.4",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for IAM policy changes",
+      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "checkov": {
+        "rule_id": "CKV_AWS_97",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "partial"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_CloudWatch.4",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_CloudWatch.4",
+        "query_name": "CloudWatch Alarm For IAM Policy Changes",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_iam_policy_changes",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudWatch.5",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for CloudTrail configuration changes",
+      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "checkov": {
+        "rule_id": "CKV_AWS_97",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "partial"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_CloudWatch.5",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_CloudWatch.5",
+        "query_name": "CloudWatch Alarm For CloudTrail Config Changes",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_cloudtrail_configuration_changes",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudWatch.6",
+      "section": "Monitoring",
+      "level": 2,
+      "description": "Ensure a log metric filter and alarm exist for AWS Management Console authentication failures",
+      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "checkov": {
+        "rule_id": "CKV_AWS_97",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "partial"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_CloudWatch.6",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_CloudWatch.6",
+        "query_name": "CloudWatch Alarm For Console Auth Failures",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_management_console_auth_failures",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudWatch.7",
+      "section": "Monitoring",
+      "level": 2,
+      "description": "Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer managed keys",
+      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "checkov": {
+        "rule_id": "CKV_AWS_97",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "partial"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_CloudWatch.7",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_CloudWatch.7",
+        "query_name": "CloudWatch Alarm For CMK Disable Deletion",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_disabling_or_scheduled_deletion_of_kms_cmk",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudWatch.8",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for S3 bucket policy changes",
+      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "checkov": {
+        "rule_id": "CKV_AWS_97",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "partial"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_CloudWatch.8",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_CloudWatch.8",
+        "query_name": "CloudWatch Alarm For S3 Policy Changes",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_s3_bucket_policy_changes",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudWatch.9",
+      "section": "Monitoring",
+      "level": 2,
+      "description": "Ensure a log metric filter and alarm exist for AWS Config configuration changes",
+      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "checkov": {
+        "rule_id": "CKV_AWS_97",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "partial"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_CloudWatch.9",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_CloudWatch.9",
+        "query_name": "CloudWatch Alarm For Config Changes",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_aws_config_configuration_changes",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudWatch.10",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for security group changes",
+      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "checkov": {
+        "rule_id": "CKV_AWS_97",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "partial"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_CloudWatch.10",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_CloudWatch.10",
+        "query_name": "CloudWatch Alarm For Security Group Changes",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_security_group_changes",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudWatch.11",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for changes to Network Access Control Lists (NACL)",
+      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "checkov": {
+        "rule_id": "CKV_AWS_97",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "partial"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_CloudWatch.11",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_CloudWatch.11",
+        "query_name": "CloudWatch Alarm For NACL Changes",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_nacl_changes",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudWatch.12",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for changes to network gateways",
+      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "checkov": {
+        "rule_id": "CKV_AWS_97",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "partial"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_CloudWatch.12",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_CloudWatch.12",
+        "query_name": "CloudWatch Alarm For Network Gateway Changes",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_network_gateway_changes",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudWatch.13",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for route table changes",
+      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "checkov": {
+        "rule_id": "CKV_AWS_97",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "partial"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_CloudWatch.13",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_CloudWatch.13",
+        "query_name": "CloudWatch Alarm For Route Table Changes",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_route_table_changes",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "CloudWatch.14",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for VPC changes",
+      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "checkov": {
+        "rule_id": "CKV_AWS_97",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "partial"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_CloudWatch.14",
+        "resource": "aws_cloudwatch_log_metric_filter",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_CloudWatch.14",
+        "query_name": "CloudWatch Alarm For VPC Changes",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_vpc_changes",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "EC2.2",
+      "section": "Networking",
+      "level": 1,
+      "description": "VPC default security groups should not allow inbound or outbound traffic",
+      "terraform_resource": ["aws_default_security_group"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": "CKV2_AWS_12",
+        "resource": "aws_default_security_group",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0041",
+        "resource": "aws_default_security_group",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "9a4ef195-74b9-4c58-b8ed-2b2fe4353a75",
+        "query_name": "VPC Default Security Group With Traffic",
+        "confidence": "verified"
+      },
+      "prowler": {
+        "check_id": "ec2_securitygroup_default_restrict_traffic",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "EC2.6",
+      "section": "Networking",
+      "level": 2,
+      "description": "VPC flow logging should be enabled in all VPCs",
+      "terraform_resource": ["aws_flow_log", "aws_vpc"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "low",
+      "cost_note": "VPC Flow Logs $0.50/GB. Minimal for empty test VPC with no traffic.",
+      "checkov": {
+        "rule_id": "CKV2_AWS_11",
+        "resource": "aws_vpc",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0046",
+        "resource": "aws_vpc",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "b0d8f392-f53d-4d63-b4b5-b82d9d5d3a8e",
+        "query_name": "VPC Flow Logs Disabled",
+        "confidence": "verified"
+      },
+      "prowler": {
+        "check_id": "ec2_vpc_flow_logs_enabled",
+        "confidence": "verified"
+      }
+    },
+    {
+      "cis_id": "EC2.21",
+      "section": "Networking",
+      "level": 1,
+      "description": "Network ACLs should not allow ingress from 0.0.0.0/0 to port 22 or port 3389",
+      "terraform_resource": ["aws_network_acl_rule"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": "CKV_AWS_229",
+        "resource": "aws_network_acl_rule",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "AVD-AWS-0102",
+        "resource": "aws_network_acl_rule",
+        "confidence": "verified"
+      },
+      "kics": {
+        "rule_id": "ad0b8b77-0af9-4b2e-8b11-6c8b78e5a3b1",
+        "query_name": "NACL Allows Ingress From 0.0.0.0/0 To SSH Or RDP",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "ec2_networkacl_allow_ingress_any_port",
+        "confidence": "verified"
+      }
+    }
+  ],
+  "summary": {
+    "total_controls": 34,
+    "by_section": {
+      "IAM": 7,
+      "S3": 4,
+      "Logging": 8,
+      "Monitoring": 12,
+      "Networking": 3
+    },
+    "by_iac_testability": {
+      "fully_testable": 27,
+      "partially_testable": 4,
+      "not_testable": 3
+    },
+    "by_confidence": {
+      "verified": 18,
+      "partial": 14,
+      "requires_verification": 22
+    },
+    "by_cost_risk": {
+      "none": 20,
+      "low": 9,
+      "medium": 4,
+      "high": 2
+    },
+    "requires_verification_count": {
+      "Checkov": 0,
+      "Trivy": 16,
+      "KICS": 16,
+      "Prowler": 0
+    }
+  },
+  "verification_instructions": {
+    "description": "To resolve CHANGE_ placeholders, run each tool against a deliberately vulnerable Terraform file and inspect JSON output for matching rule IDs.",
+    "checkov": "checkov -d ./terraform_scenarios --output json | jq '.results.failed_checks[] | {check_id, resource}'",
+    "trivy": "trivy config ./terraform_scenarios --format json | jq '.Results[].Misconfigurations[] | {ID, Title}'",
+    "kics": "kics scan -p ./terraform_scenarios --report-formats json -o ./results && jq '.queries[] | {id, query_name}' results/results.json",
+    "prowler": "prowler aws --compliance cis_1.4_aws --output-formats json -F prowler_results"
+  }
+}
