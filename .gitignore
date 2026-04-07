@@ -1,0 +1,11 @@
+.terraform
+.terraform.*
+*.tfstate
+*.tfstate.backup
+.aws/
+results/runtime
+results/iac/
+terraform.tfvars
+.env
+EOF
+
