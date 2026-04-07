@@ -1,11 +1,36 @@
-.terraform
-.terraform.*
-*.tfstate
-*.tfstate.backup
-.aws/
-results/runtime
-results/iac/
-terraform.tfvars
 .env
 EOF
 
+# Terraform
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# AWS credentials - nigdy na git
+.aws/
+credentials
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+
+# results/
+results/
+
+
+# System
+.DS_Store
+*.swp
+*.swo
