@@ -94,3 +94,237 @@ resource "aws_cloudwatch_metric_alarm" "cw5_cloudtrail_change" {
   comparison_operator = "GreaterThanOrEqualToThreshold"
   alarm_actions       = [aws_sns_topic.cis_alerts.arn]
 }
+
+# CloudWatch.6 - Console Authentication Failures
+
+resource "aws_cloudwatch_log_metric_filter" "cw6_console_auth_failures" {
+  name           = "cis-cw6-console-auth-failures"
+  log_group_name = aws_cloudwatch_log_group.cis.name
+  pattern        = "{ ($.eventName = ConsoleLogin) && ($.errorMessage = \"Failed authentication\") }"
+
+  metric_transformation {
+    name      = "ConsoleAuthFailures"
+    namespace = "CISBenchmark"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "cw6_console_auth_failures" {
+  alarm_name          = "cis-cw6-console-auth-failures"
+  metric_name         = "ConsoleAuthFailures"
+  namespace           = "CISBenchmark"
+  statistic           = "Sum"
+  period              = 300
+  evaluation_periods  = 1
+  threshold           = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  alarm_actions       = [aws_sns_topic.cis_alerts.arn]
+}
+
+# CloudWatch.7 - Disabling or Scheduled Deletion of Customer Managed Keys
+
+resource "aws_cloudwatch_log_metric_filter" "cw7_cmk_disable_delete" {
+  name           = "cis-cw7-cmk-disable-delete"
+  log_group_name = aws_cloudwatch_log_group.cis.name
+  pattern        = "{ ($.eventSource = kms.amazonaws.com) && (($.eventName = DisableKey) || ($.eventName = ScheduleKeyDeletion)) }"
+
+  metric_transformation {
+    name      = "CMKDisableOrDelete"
+    namespace = "CISBenchmark"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "cw7_cmk_disable_delete" {
+  alarm_name          = "cis-cw7-cmk-disable-delete"
+  metric_name         = "CMKDisableOrDelete"
+  namespace           = "CISBenchmark"
+  statistic           = "Sum"
+  period              = 300
+  evaluation_periods  = 1
+  threshold           = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  alarm_actions       = [aws_sns_topic.cis_alerts.arn]
+}
+
+# CloudWatch.8 - S3 Bucket Policy Changes
+
+resource "aws_cloudwatch_log_metric_filter" "cw8_s3_policy_changes" {
+  name           = "cis-cw8-s3-policy-changes"
+  log_group_name = aws_cloudwatch_log_group.cis.name
+  pattern        = "{ ($.eventSource = s3.amazonaws.com) && (($.eventName = PutBucketAcl) || ($.eventName = PutBucketPolicy) || ($.eventName = PutBucketCors) || ($.eventName = PutBucketLifecycle) || ($.eventName = PutBucketReplication) || ($.eventName = DeleteBucketPolicy) || ($.eventName = DeleteBucketCors) || ($.eventName = DeleteBucketLifecycle) || ($.eventName = DeleteBucketReplication)) }"
+
+  metric_transformation {
+    name      = "S3BucketPolicyChanges"
+    namespace = "CISBenchmark"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "cw8_s3_policy_changes" {
+  alarm_name          = "cis-cw8-s3-policy-changes"
+  metric_name         = "S3BucketPolicyChanges"
+  namespace           = "CISBenchmark"
+  statistic           = "Sum"
+  period              = 300
+  evaluation_periods  = 1
+  threshold           = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  alarm_actions       = [aws_sns_topic.cis_alerts.arn]
+}
+
+# CloudWatch.9 - AWS Config Configuration Changes
+
+resource "aws_cloudwatch_log_metric_filter" "cw9_config_changes" {
+  name           = "cis-cw9-config-changes"
+  log_group_name = aws_cloudwatch_log_group.cis.name
+  pattern        = "{ ($.eventSource = config.amazonaws.com) && (($.eventName = StopConfigurationRecorder) || ($.eventName = DeleteDeliveryChannel) || ($.eventName = PutDeliveryChannel) || ($.eventName = PutConfigurationRecorder)) }"
+
+  metric_transformation {
+    name      = "AWSConfigChanges"
+    namespace = "CISBenchmark"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "cw9_config_changes" {
+  alarm_name          = "cis-cw9-config-changes"
+  metric_name         = "AWSConfigChanges"
+  namespace           = "CISBenchmark"
+  statistic           = "Sum"
+  period              = 300
+  evaluation_periods  = 1
+  threshold           = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  alarm_actions       = [aws_sns_topic.cis_alerts.arn]
+}
+
+# CloudWatch.10 - Security Group Changes
+
+resource "aws_cloudwatch_log_metric_filter" "cw10_sg_changes" {
+  name           = "cis-cw10-sg-changes"
+  log_group_name = aws_cloudwatch_log_group.cis.name
+  pattern        = "{ ($.eventName = AuthorizeSecurityGroupIngress) || ($.eventName = AuthorizeSecurityGroupEgress) || ($.eventName = RevokeSecurityGroupIngress) || ($.eventName = RevokeSecurityGroupEgress) || ($.eventName = CreateSecurityGroup) || ($.eventName = DeleteSecurityGroup) }"
+
+  metric_transformation {
+    name      = "SecurityGroupChanges"
+    namespace = "CISBenchmark"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "cw10_sg_changes" {
+  alarm_name          = "cis-cw10-sg-changes"
+  metric_name         = "SecurityGroupChanges"
+  namespace           = "CISBenchmark"
+  statistic           = "Sum"
+  period              = 300
+  evaluation_periods  = 1
+  threshold           = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  alarm_actions       = [aws_sns_topic.cis_alerts.arn]
+}
+
+# CloudWatch.11 - Network Access Control List (NACL) Changes
+
+resource "aws_cloudwatch_log_metric_filter" "cw11_nacl_changes" {
+  name           = "cis-cw11-nacl-changes"
+  log_group_name = aws_cloudwatch_log_group.cis.name
+  pattern        = "{ ($.eventName = CreateNetworkAcl) || ($.eventName = CreateNetworkAclEntry) || ($.eventName = DeleteNetworkAcl) || ($.eventName = DeleteNetworkAclEntry) || ($.eventName = ReplaceNetworkAclEntry) || ($.eventName = ReplaceNetworkAclAssociation) }"
+
+  metric_transformation {
+    name      = "NACLChanges"
+    namespace = "CISBenchmark"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "cw11_nacl_changes" {
+  alarm_name          = "cis-cw11-nacl-changes"
+  metric_name         = "NACLChanges"
+  namespace           = "CISBenchmark"
+  statistic           = "Sum"
+  period              = 300
+  evaluation_periods  = 1
+  threshold           = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  alarm_actions       = [aws_sns_topic.cis_alerts.arn]
+}
+
+# CloudWatch.12 - Network Gateway Changes
+
+resource "aws_cloudwatch_log_metric_filter" "cw12_gateway_changes" {
+  name           = "cis-cw12-gateway-changes"
+  log_group_name = aws_cloudwatch_log_group.cis.name
+  pattern        = "{ ($.eventName = CreateCustomerGateway) || ($.eventName = DeleteCustomerGateway) || ($.eventName = AttachInternetGateway) || ($.eventName = CreateInternetGateway) || ($.eventName = DeleteInternetGateway) || ($.eventName = DetachInternetGateway) }"
+
+  metric_transformation {
+    name      = "NetworkGatewayChanges"
+    namespace = "CISBenchmark"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "cw12_gateway_changes" {
+  alarm_name          = "cis-cw12-gateway-changes"
+  metric_name         = "NetworkGatewayChanges"
+  namespace           = "CISBenchmark"
+  statistic           = "Sum"
+  period              = 300
+  evaluation_periods  = 1
+  threshold           = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  alarm_actions       = [aws_sns_topic.cis_alerts.arn]
+}
+
+# CloudWatch.13 - Route Table Changes
+
+resource "aws_cloudwatch_log_metric_filter" "cw13_route_table_changes" {
+  name           = "cis-cw13-route-table-changes"
+  log_group_name = aws_cloudwatch_log_group.cis.name
+  pattern        = "{ ($.eventName = CreateRoute) || ($.eventName = CreateRouteTable) || ($.eventName = ReplaceRoute) || ($.eventName = ReplaceRouteTableAssociation) || ($.eventName = DeleteRouteTable) || ($.eventName = DeleteRoute) || ($.eventName = DisassociateRouteTable) }"
+
+  metric_transformation {
+    name      = "RouteTableChanges"
+    namespace = "CISBenchmark"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "cw13_route_table_changes" {
+  alarm_name          = "cis-cw13-route-table-changes"
+  metric_name         = "RouteTableChanges"
+  namespace           = "CISBenchmark"
+  statistic           = "Sum"
+  period              = 300
+  evaluation_periods  = 1
+  threshold           = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  alarm_actions       = [aws_sns_topic.cis_alerts.arn]
+}
+
+# CloudWatch.14 - VPC Changes
+
+resource "aws_cloudwatch_log_metric_filter" "cw14_vpc_changes" {
+  name           = "cis-cw14-vpc-changes"
+  log_group_name = aws_cloudwatch_log_group.cis.name
+  pattern        = "{ ($.eventName = CreateVpc) || ($.eventName = DeleteVpc) || ($.eventName = ModifyVpcAttribute) || ($.eventName = AcceptVpcPeeringConnection) || ($.eventName = CreateVpcPeeringConnection) || ($.eventName = DeleteVpcPeeringConnection) || ($.eventName = RejectVpcPeeringConnection) || ($.eventName = AttachClassicLinkVpc) || ($.eventName = DetachClassicLinkVpc) || ($.eventName = DisableVpcClassicLink) || ($.eventName = EnableVpcClassicLink) }"
+
+  metric_transformation {
+    name      = "VPCChanges"
+    namespace = "CISBenchmark"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "cw14_vpc_changes" {
+  alarm_name          = "cis-cw14-vpc-changes"
+  metric_name         = "VPCChanges"
+  namespace           = "CISBenchmark"
+  statistic           = "Sum"
+  period              = 300
+  evaluation_periods  = 1
+  threshold           = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  alarm_actions       = [aws_sns_topic.cis_alerts.arn]
+}
