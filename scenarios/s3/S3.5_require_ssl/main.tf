@@ -13,9 +13,7 @@
 # Cost risk: none
 # =============================================================
 
-provider "aws" {
-  region = "eu-central-1"
-}
+
 
 resource "aws_s3_bucket" "s3_5_bucket" {
   bucket = "research-s3-5-ssl-enforcement-al2"
