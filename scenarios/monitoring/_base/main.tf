@@ -1,3 +1,86 @@
+# 1. Bucket S3 for CloudTrail (required by aws_cloudtrail)
+resource "aws_s3_bucket" "trail" {
+  bucket        = "cis-cloudtrail-${data.aws_caller_identity.current.account_id}"
+  force_destroy = true
+
+  tags = {
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "compliant"
+    ResearchID = "Monitoring"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "trail" {
+  bucket                  = aws_s3_bucket.trail.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_policy" "trail" {
+  bucket = aws_s3_bucket.trail.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "AWSCloudTrailAclCheck"
+        Effect    = "Allow"
+        Principal = { Service = "cloudtrail.amazonaws.com" }
+        Action    = "s3:GetBucketAcl"
+        Resource  = aws_s3_bucket.trail.arn
+      },
+      {
+        Sid       = "AWSCloudTrailWrite"
+        Effect    = "Allow"
+        Principal = { Service = "cloudtrail.amazonaws.com" }
+        Action    = "s3:PutObject"
+        Resource  = "${aws_s3_bucket.trail.arn}/AWSLogs/${data.aws_caller_identity.current.account_id}/*"
+        Condition = {
+          StringEquals = { "s3:x-amz-acl" = "bucket-owner-full-control" }
+        }
+      }
+    ]
+  })
+}
+
+# 2. Rola IAM dla CloudTrail → CloudWatch
+resource "aws_iam_role" "cloudtrail_cw" {
+  name = "cis-cloudtrail-cloudwatch-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect    = "Allow"
+      Principal = { Service = "cloudtrail.amazonaws.com" }
+      Action    = "sts:AssumeRole"
+    }]
+  })
+}
+
+resource "aws_iam_role_policy" "cloudtrail_cw" {
+  name = "cis-cloudtrail-cloudwatch-policy"
+  role = aws_iam_role.cloudtrail_cw.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Action = [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ]
+      Resource = "${aws_cloudwatch_log_group.cis.arn}:*"
+    }]
+  })
+}
+
+# 3. Data source — potrzebny do account_id w nazwach bucketów
+data "aws_caller_identity" "current" {}
+
+
+
+
 resource "aws_cloudwatch_log_group" "cis" {
     name = "/cis/cloudtrail"
     retention_in_days = 90
