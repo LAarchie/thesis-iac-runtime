@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "description": "Dokumentacja środowiska badawczego — wersje narzędzi użytych w badaniu",
+    "research": "Shift-Left kontra Runtime: Jak Checkov, Trivy i KICS radzą sobie z naruszeniami CIS AWS",
+    "cis_version": "CIS AWS Foundations Benchmark v1.4.0",
+    "aws_region": "eu-central-1",
+    "note": "Wersje zafixowane dla reprodukowalności wyników. Nie aktualizować w trakcie badania."
+  },
+  "environment": {
+    "os": "Ubuntu 24.04 LTS",
+    "terraform": {
+      "version": ">=1.5.0",
+      "aws_provider": "~5.0"
+    }
+  },
+  "shift_left_tools": {
+    "checkov": {
+      "version": "3.2.500",
+      "distribution": "Docker Hub",
+      "image": "bridgecrew/checkov:3.2.500",
+      "image_latest_alias": "bridgecrew/checkov:latest",
+      "cis_profile": "cis_aws_v14",
+      "role": "Skanowanie Terraform pre-deploy",
+      "run_command": "docker run --rm -v $(pwd):/src bridgecrew/checkov:3.2.500 -d /src/<scenario> --output json"
+    },
+    "trivy": {
+      "version": "0.69.3",
+      "distribution": "apt (aquasecurity trivy repo)",
+      "image": null,
+      "cis_profile": "aws-cis-1.4",
+      "role": "Skanowanie Terraform pre-deploy (następca tfsec)",
+      "run_command": "trivy config <scenario> --format json",
+      "distribution_note": "Instalacja przez apt zamiast Docker Hub z powodu incydentu bezpieczeństwa (supply chain compromise) z marca 2026. Wersje 0.69.4-0.69.6 oraz tag latest na Docker Hub były skompromitowane przez grupę TeamPCP. Ostatnia bezpieczna wersja: 0.69.3.",
+      "security_incident_reference": "https://www.aquasec.com/blog/trivy-supply-chain-attack-what-you-need-to-know/"
+    },
+    "kics": {
+      "version": "2.1.20",
+      "distribution": "Docker Hub",
+      "image": "checkmarx/kics:v2.1.20",
+      "image_latest_alias": "checkmarx/kics:latest",
+      "cis_profile": "CIS-AWS",
+      "role": "Skanowanie Terraform pre-deploy (Rego-based)",
+      "run_command": "docker run --rm -v $(pwd):/src checkmarx/kics:v2.1.20 scan -p /src/<scenario> --report-formats json -o /src/results"
+    }
+  },
+  "runtime_tools": {
+    "prowler": {
+      "version": "5.19.0",
+      "distribution": "Docker Hub",
+      "image": "prowlercloud/prowler:5.19.0",
+      "image_latest_alias": "prowlercloud/prowler:latest",
+      "cis_profile": "cis_1.4_aws",
+      "role": "Walidacja runtime — skanowanie wdrożonych zasobów AWS",
+      "run_command": "docker run --rm -v ~/.aws:/root/.aws prowlercloud/prowler:5.19.0 aws --compliance cis_1.4_aws --region eu-central-1 --output-formats json"
+    }
+  },
+  "pinning_rationale": "Wszystkie narzędzia używają konkretnych tagów wersji zamiast 'latest'. Incydent bezpieczeństwa Trivy z marca 2026 (supply chain compromise via Docker Hub) potwierdza konieczność pinowania wersji w badaniach wymagających reprodukowalności. Tag 'latest' jest mutowalny i może wskazywać na różne wersje w różnych momentach czasowych, co uniemożliwia porównanie wyników między przebiegami."
+}
