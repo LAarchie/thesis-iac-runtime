@@ -1,0 +1,15 @@
+{
+  "cis_id": "CloudWatch.6",
+  "section": "Monitoring",
+  "level": 2,
+  "description": "Brak alarmu dla błędów uwierzytelnienia w konsoli",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": [
+    "aws_cloudwatch_log_metric_filter.cw6_console_auth_failures",
+    "aws_cloudwatch_metric_alarm.cw6_console_auth_failures"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "low"
+}

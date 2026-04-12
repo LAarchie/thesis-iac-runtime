@@ -1,0 +1,15 @@
+{
+  "cis_id": "CloudWatch.4",
+  "section": "Monitoring",
+  "level": 1,
+  "description": "Brak alarmu dla zmian polityk IAM",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": [
+    "aws_cloudwatch_log_metric_filter.cw4_iam",
+    "aws_cloudwatch_metric_alarm.cw4_iam"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "low"
+}

@@ -1,0 +1,15 @@
+{
+  "cis_id": "CloudWatch.10",
+  "section": "Monitoring",
+  "level": 1,
+  "description": "Brak alarmu dla zmian security group",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": [
+    "aws_cloudwatch_log_metric_filter.cw10_sg_changes",
+    "aws_cloudwatch_metric_alarm.cw10_sg_changes"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "low"
+}

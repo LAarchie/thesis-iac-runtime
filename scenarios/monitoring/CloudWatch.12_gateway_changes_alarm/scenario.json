@@ -1,0 +1,15 @@
+{
+  "cis_id": "CloudWatch.12",
+  "section": "Monitoring",
+  "level": 1,
+  "description": "Brak alarmu dla zmian bram sieciowych",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": [
+    "aws_cloudwatch_log_metric_filter.cw12_gateway_changes",
+    "aws_cloudwatch_metric_alarm.cw12_gateway_changes"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "low"
+}

@@ -1,0 +1,15 @@
+{
+  "cis_id": "CloudWatch.8",
+  "section": "Monitoring",
+  "level": 1,
+  "description": "Brak alarmu dla zmian polityki bucketu S3",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": [
+    "aws_cloudwatch_log_metric_filter.cw8_s3_policy_changes",
+    "aws_cloudwatch_metric_alarm.cw8_s3_policy_changes"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "low"
+}

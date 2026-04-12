@@ -1,0 +1,15 @@
+{
+  "cis_id": "CloudWatch.7",
+  "section": "Monitoring",
+  "level": 2,
+  "description": "Brak alarmu dla wyłączenia lub usunięcia kluczy CMK",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": [
+    "aws_cloudwatch_log_metric_filter.cw7_cmk_disable_delete",
+    "aws_cloudwatch_metric_alarm.cw7_cmk_disable_delete"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "low"
+}

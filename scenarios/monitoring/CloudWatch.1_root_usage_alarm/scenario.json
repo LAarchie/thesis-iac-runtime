@@ -1,0 +1,15 @@
+{
+  "cis_id": "CloudWatch.1",
+  "section": "Monitoring",
+  "level": 1,
+  "description": "Brak alarmu dla użycia konta root",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": [
+    "aws_cloudwatch_log_metric_filter.cw1_root",
+    "aws_cloudwatch_metric_alarm.cw1_root"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "low"
+}
