@@ -44,7 +44,7 @@ resource "aws_s3_bucket_policy" "trail" {
   })
 }
 
-# 2. Rola IAM dla CloudTrail → CloudWatch
+# 2.  IAM Role for CloudTrail → CloudWatch
 resource "aws_iam_role" "cloudtrail_cw" {
   name = "cis-cloudtrail-cloudwatch-role"
 
@@ -75,19 +75,19 @@ resource "aws_iam_role_policy" "cloudtrail_cw" {
   })
 }
 
-# 3. Data source — potrzebny do account_id w nazwach bucketów
+# 3. Data source — required for account_id in the bucket names
 data "aws_caller_identity" "current" {}
 
 
 
 
 resource "aws_cloudwatch_log_group" "cis" {
-    name = "/cis/cloudtrail"
-    retention_in_days = 90
+  name              = "/cis/cloudtrail"
+  retention_in_days = 90
 }
 
 resource "aws_sns_topic" "cis_alerts" {
-    name = "cis-alerts"
+  name = "cis-alerts"
 }
 
 resource "aws_cloudtrail" "main" {
