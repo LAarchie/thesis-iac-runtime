@@ -4,7 +4,12 @@
     "version": "1.4.0",
     "source": "AWS Security Hub",
     "created": "2026-04-07",
-    "tools": ["Checkov", "Trivy", "KICS", "Prowler"],
+    "tools": [
+      "Checkov",
+      "Trivy",
+      "KICS",
+      "Prowler"
+    ],
     "terraform_provider": "hashicorp/aws",
     "notes": "Rule IDs marked as CHANGE_<TOOL>_<TAG> require local verification by running the tool against a sample vulnerable Terraform file and inspecting JSON output. Prowler check IDs follow the pattern used in --compliance cis_1.4_aws mode."
   },
@@ -14,7 +19,10 @@
       "section": "IAM",
       "level": 1,
       "description": "IAM policies should not allow full '*' administrative privileges",
-      "terraform_resource": ["aws_iam_policy", "aws_iam_policy_document"],
+      "terraform_resource": [
+        "aws_iam_policy",
+        "aws_iam_policy_document"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "none",
@@ -43,7 +51,9 @@
       "section": "IAM",
       "level": 1,
       "description": "Ensure IAM password policy requires minimum password length of 14 or greater",
-      "terraform_resource": ["aws_iam_account_password_policy"],
+      "terraform_resource": [
+        "aws_iam_account_password_policy"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "none",
@@ -72,7 +82,9 @@
       "section": "IAM",
       "level": 1,
       "description": "Ensure IAM password policy prevents password reuse",
-      "terraform_resource": ["aws_iam_account_password_policy"],
+      "terraform_resource": [
+        "aws_iam_account_password_policy"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "none",
@@ -101,7 +113,10 @@
       "section": "IAM",
       "level": 1,
       "description": "Ensure a support role has been created to manage incidents with AWS Support",
-      "terraform_resource": ["aws_iam_role", "aws_iam_role_policy_attachment"],
+      "terraform_resource": [
+        "aws_iam_role",
+        "aws_iam_role_policy_attachment"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "none",
@@ -130,7 +145,9 @@
       "section": "IAM",
       "level": 1,
       "description": "IAM users' access keys should be rotated every 90 days or less",
-      "terraform_resource": ["aws_iam_access_key"],
+      "terraform_resource": [
+        "aws_iam_access_key"
+      ],
       "iac_testable": false,
       "operationally_testable": true,
       "iac_limitation": "Operational state — key rotation age cannot be determined from Terraform code",
@@ -157,7 +174,9 @@
       "section": "IAM",
       "level": 1,
       "description": "MFA should be enabled for all IAM users that have a console password",
-      "terraform_resource": ["aws_iam_user_login_profile"],
+      "terraform_resource": [
+        "aws_iam_user_login_profile"
+      ],
       "iac_testable": false,
       "operationally_testable": true,
       "iac_limitation": "MFA device association is an operational state — Terraform can create login profiles but cannot enforce MFA enrollment",
@@ -214,17 +233,27 @@
       "section": "S3",
       "level": 2,
       "description": "S3 general purpose buckets should have block public access settings enabled",
-      "terraform_resource": ["aws_s3_bucket_public_access_block"],
+      "terraform_resource": [
+        "aws_s3_bucket_public_access_block"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "none",
       "checkov": {
-        "rule_id": ["CKV_AWS_53", "CKV_AWS_54", "CKV_AWS_55", "CKV_AWS_56"],
+        "rule_id": [
+          "CKV_AWS_53",
+          "CKV_AWS_54",
+          "CKV_AWS_55",
+          "CKV_AWS_56"
+        ],
         "resource": "aws_s3_bucket_public_access_block",
         "confidence": "verified"
       },
       "trivy": {
-        "rule_id": ["AVD-AWS-0086", "AVD-AWS-0087"],
+        "rule_id": [
+          "AVD-AWS-0086",
+          "AVD-AWS-0087"
+        ],
         "resource": "aws_s3_bucket_public_access_block",
         "confidence": "verified"
       },
@@ -243,7 +272,9 @@
       "section": "S3",
       "level": 1,
       "description": "S3 general purpose buckets should require requests to use SSL",
-      "terraform_resource": ["aws_s3_bucket_policy"],
+      "terraform_resource": [
+        "aws_s3_bucket_policy"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "none",
@@ -272,7 +303,9 @@
       "section": "S3",
       "level": 2,
       "description": "S3 general purpose buckets should block public access",
-      "terraform_resource": ["aws_s3_bucket_public_access_block"],
+      "terraform_resource": [
+        "aws_s3_bucket_public_access_block"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "none",
@@ -301,7 +334,9 @@
       "section": "S3",
       "level": 2,
       "description": "S3 general purpose buckets should have MFA delete enabled",
-      "terraform_resource": ["aws_s3_bucket_versioning"],
+      "terraform_resource": [
+        "aws_s3_bucket_versioning"
+      ],
       "iac_testable": false,
       "operationally_testable": true,
       "iac_limitation": "MFA Delete requires root account with MFA — cannot be configured via standard Terraform provider",
@@ -331,7 +366,9 @@
       "section": "Logging",
       "level": 1,
       "description": "CloudTrail should be enabled and configured with at least one multi-Region trail that includes read and write management events",
-      "terraform_resource": ["aws_cloudtrail"],
+      "terraform_resource": [
+        "aws_cloudtrail"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "medium",
@@ -342,7 +379,10 @@
         "confidence": "verified"
       },
       "trivy": {
-        "rule_id": ["AVD-AWS-0014", "AVD-AWS-0015"],
+        "rule_id": [
+          "AVD-AWS-0014",
+          "AVD-AWS-0015"
+        ],
         "resource": "aws_cloudtrail",
         "confidence": "verified"
       },
@@ -361,7 +401,10 @@
       "section": "Logging",
       "level": 2,
       "description": "CloudTrail should have encryption at-rest enabled",
-      "terraform_resource": ["aws_cloudtrail", "aws_kms_key"],
+      "terraform_resource": [
+        "aws_cloudtrail",
+        "aws_kms_key"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "high",
@@ -391,7 +434,9 @@
       "section": "Logging",
       "level": 2,
       "description": "CloudTrail log file validation should be enabled",
-      "terraform_resource": ["aws_cloudtrail"],
+      "terraform_resource": [
+        "aws_cloudtrail"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "medium",
@@ -421,7 +466,11 @@
       "section": "Logging",
       "level": 1,
       "description": "CloudTrail trails should be integrated with Amazon CloudWatch Logs",
-      "terraform_resource": ["aws_cloudtrail", "aws_cloudwatch_log_group", "aws_iam_role"],
+      "terraform_resource": [
+        "aws_cloudtrail",
+        "aws_cloudwatch_log_group",
+        "aws_iam_role"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "medium",
@@ -452,13 +501,20 @@
       "section": "Logging",
       "level": 1,
       "description": "Ensure the S3 bucket used to store CloudTrail logs is not publicly accessible",
-      "terraform_resource": ["aws_s3_bucket_public_access_block"],
+      "terraform_resource": [
+        "aws_s3_bucket_public_access_block"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
       "cost_note": "S3 bucket only — negligible cost.",
       "checkov": {
-        "rule_id": ["CKV_AWS_53", "CKV_AWS_54", "CKV_AWS_55", "CKV_AWS_56"],
+        "rule_id": [
+          "CKV_AWS_53",
+          "CKV_AWS_54",
+          "CKV_AWS_55",
+          "CKV_AWS_56"
+        ],
         "resource": "aws_s3_bucket_public_access_block",
         "confidence": "verified"
       },
@@ -482,7 +538,9 @@
       "section": "Logging",
       "level": 2,
       "description": "Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket",
-      "terraform_resource": ["aws_s3_bucket_logging"],
+      "terraform_resource": [
+        "aws_s3_bucket_logging"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -512,7 +570,10 @@
       "section": "Logging",
       "level": 1,
       "description": "AWS Config should be enabled and use the service-linked role for resource recording",
-      "terraform_resource": ["aws_config_configuration_recorder", "aws_config_delivery_channel"],
+      "terraform_resource": [
+        "aws_config_configuration_recorder",
+        "aws_config_delivery_channel"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "medium",
@@ -542,7 +603,9 @@
       "section": "Logging",
       "level": 2,
       "description": "AWS KMS key rotation should be enabled",
-      "terraform_resource": ["aws_kms_key"],
+      "terraform_resource": [
+        "aws_kms_key"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "high",
@@ -572,7 +635,11 @@
       "section": "Monitoring",
       "level": 1,
       "description": "A log metric filter and alarm should exist for usage of the 'root' user",
-      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "terraform_resource": [
+        "aws_cloudwatch_log_metric_filter",
+        "aws_cloudwatch_metric_alarm",
+        "aws_sns_topic"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -590,9 +657,9 @@
         "confidence": "requires_verification"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_CloudWatch.1",
-        "query_name": "CloudWatch Alarm For Root Login",
-        "confidence": "requires_verification"
+        "rule_id": null,
+        "confidence": "not_applicable",
+        "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_root_usage",
@@ -604,7 +671,11 @@
       "section": "Monitoring",
       "level": 1,
       "description": "Ensure a log metric filter and alarm exist for IAM policy changes",
-      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "terraform_resource": [
+        "aws_cloudwatch_log_metric_filter",
+        "aws_cloudwatch_metric_alarm",
+        "aws_sns_topic"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -619,9 +690,9 @@
         "confidence": "requires_verification"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_CloudWatch.4",
-        "query_name": "CloudWatch Alarm For IAM Policy Changes",
-        "confidence": "requires_verification"
+        "rule_id": null,
+        "confidence": "not_applicable",
+        "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_iam_policy_changes",
@@ -633,7 +704,11 @@
       "section": "Monitoring",
       "level": 1,
       "description": "Ensure a log metric filter and alarm exist for CloudTrail configuration changes",
-      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "terraform_resource": [
+        "aws_cloudwatch_log_metric_filter",
+        "aws_cloudwatch_metric_alarm",
+        "aws_sns_topic"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -648,9 +723,9 @@
         "confidence": "requires_verification"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_CloudWatch.5",
-        "query_name": "CloudWatch Alarm For CloudTrail Config Changes",
-        "confidence": "requires_verification"
+        "rule_id": null,
+        "confidence": "not_applicable",
+        "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_cloudtrail_configuration_changes",
@@ -662,7 +737,11 @@
       "section": "Monitoring",
       "level": 2,
       "description": "Ensure a log metric filter and alarm exist for AWS Management Console authentication failures",
-      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "terraform_resource": [
+        "aws_cloudwatch_log_metric_filter",
+        "aws_cloudwatch_metric_alarm",
+        "aws_sns_topic"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -677,9 +756,9 @@
         "confidence": "requires_verification"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_CloudWatch.6",
-        "query_name": "CloudWatch Alarm For Console Auth Failures",
-        "confidence": "requires_verification"
+        "rule_id": null,
+        "confidence": "not_applicable",
+        "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_management_console_auth_failures",
@@ -691,7 +770,11 @@
       "section": "Monitoring",
       "level": 2,
       "description": "Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer managed keys",
-      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "terraform_resource": [
+        "aws_cloudwatch_log_metric_filter",
+        "aws_cloudwatch_metric_alarm",
+        "aws_sns_topic"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -706,9 +789,9 @@
         "confidence": "requires_verification"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_CloudWatch.7",
-        "query_name": "CloudWatch Alarm For CMK Disable Deletion",
-        "confidence": "requires_verification"
+        "rule_id": null,
+        "confidence": "not_applicable",
+        "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_disabling_or_scheduled_deletion_of_kms_cmk",
@@ -720,7 +803,11 @@
       "section": "Monitoring",
       "level": 1,
       "description": "Ensure a log metric filter and alarm exist for S3 bucket policy changes",
-      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "terraform_resource": [
+        "aws_cloudwatch_log_metric_filter",
+        "aws_cloudwatch_metric_alarm",
+        "aws_sns_topic"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -735,9 +822,9 @@
         "confidence": "requires_verification"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_CloudWatch.8",
-        "query_name": "CloudWatch Alarm For S3 Policy Changes",
-        "confidence": "requires_verification"
+        "rule_id": null,
+        "confidence": "not_applicable",
+        "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_s3_bucket_policy_changes",
@@ -749,7 +836,11 @@
       "section": "Monitoring",
       "level": 2,
       "description": "Ensure a log metric filter and alarm exist for AWS Config configuration changes",
-      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "terraform_resource": [
+        "aws_cloudwatch_log_metric_filter",
+        "aws_cloudwatch_metric_alarm",
+        "aws_sns_topic"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -764,9 +855,9 @@
         "confidence": "requires_verification"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_CloudWatch.9",
-        "query_name": "CloudWatch Alarm For Config Changes",
-        "confidence": "requires_verification"
+        "rule_id": null,
+        "confidence": "not_applicable",
+        "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_aws_config_configuration_changes",
@@ -778,7 +869,11 @@
       "section": "Monitoring",
       "level": 1,
       "description": "Ensure a log metric filter and alarm exist for security group changes",
-      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "terraform_resource": [
+        "aws_cloudwatch_log_metric_filter",
+        "aws_cloudwatch_metric_alarm",
+        "aws_sns_topic"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -793,9 +888,9 @@
         "confidence": "requires_verification"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_CloudWatch.10",
-        "query_name": "CloudWatch Alarm For Security Group Changes",
-        "confidence": "requires_verification"
+        "rule_id": null,
+        "confidence": "not_applicable",
+        "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_security_group_changes",
@@ -807,7 +902,11 @@
       "section": "Monitoring",
       "level": 1,
       "description": "Ensure a log metric filter and alarm exist for changes to Network Access Control Lists (NACL)",
-      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "terraform_resource": [
+        "aws_cloudwatch_log_metric_filter",
+        "aws_cloudwatch_metric_alarm",
+        "aws_sns_topic"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -822,9 +921,9 @@
         "confidence": "requires_verification"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_CloudWatch.11",
-        "query_name": "CloudWatch Alarm For NACL Changes",
-        "confidence": "requires_verification"
+        "rule_id": null,
+        "confidence": "not_applicable",
+        "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_nacl_changes",
@@ -836,7 +935,11 @@
       "section": "Monitoring",
       "level": 1,
       "description": "Ensure a log metric filter and alarm exist for changes to network gateways",
-      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "terraform_resource": [
+        "aws_cloudwatch_log_metric_filter",
+        "aws_cloudwatch_metric_alarm",
+        "aws_sns_topic"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -851,9 +954,9 @@
         "confidence": "requires_verification"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_CloudWatch.12",
-        "query_name": "CloudWatch Alarm For Network Gateway Changes",
-        "confidence": "requires_verification"
+        "rule_id": null,
+        "confidence": "not_applicable",
+        "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_network_gateway_changes",
@@ -865,7 +968,11 @@
       "section": "Monitoring",
       "level": 1,
       "description": "Ensure a log metric filter and alarm exist for route table changes",
-      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "terraform_resource": [
+        "aws_cloudwatch_log_metric_filter",
+        "aws_cloudwatch_metric_alarm",
+        "aws_sns_topic"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -880,9 +987,9 @@
         "confidence": "requires_verification"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_CloudWatch.13",
-        "query_name": "CloudWatch Alarm For Route Table Changes",
-        "confidence": "requires_verification"
+        "rule_id": null,
+        "confidence": "not_applicable",
+        "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_route_table_changes",
@@ -894,7 +1001,11 @@
       "section": "Monitoring",
       "level": 1,
       "description": "Ensure a log metric filter and alarm exist for VPC changes",
-      "terraform_resource": ["aws_cloudwatch_log_metric_filter", "aws_cloudwatch_metric_alarm", "aws_sns_topic"],
+      "terraform_resource": [
+        "aws_cloudwatch_log_metric_filter",
+        "aws_cloudwatch_metric_alarm",
+        "aws_sns_topic"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -909,9 +1020,9 @@
         "confidence": "requires_verification"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_CloudWatch.14",
-        "query_name": "CloudWatch Alarm For VPC Changes",
-        "confidence": "requires_verification"
+        "rule_id": null,
+        "confidence": "not_applicable",
+        "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_vpc_changes",
@@ -923,7 +1034,9 @@
       "section": "Networking",
       "level": 1,
       "description": "VPC default security groups should not allow inbound or outbound traffic",
-      "terraform_resource": ["aws_default_security_group"],
+      "terraform_resource": [
+        "aws_default_security_group"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "none",
@@ -952,7 +1065,10 @@
       "section": "Networking",
       "level": 2,
       "description": "VPC flow logging should be enabled in all VPCs",
-      "terraform_resource": ["aws_flow_log", "aws_vpc"],
+      "terraform_resource": [
+        "aws_flow_log",
+        "aws_vpc"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
@@ -982,7 +1098,9 @@
       "section": "Networking",
       "level": 1,
       "description": "Network ACLs should not allow ingress from 0.0.0.0/0 to port 22 or port 3389",
-      "terraform_resource": ["aws_network_acl_rule"],
+      "terraform_resource": [
+        "aws_network_acl_rule"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "none",
