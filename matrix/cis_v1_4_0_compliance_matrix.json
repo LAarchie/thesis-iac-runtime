@@ -652,9 +652,10 @@
         "note": "CKV_AWS_97 covers all CloudWatch.x controls generically — does not distinguish individual CIS sub-controls"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_CloudWatch.1",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
@@ -685,9 +686,10 @@
         "confidence": "partial"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_CloudWatch.4",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
@@ -718,9 +720,10 @@
         "confidence": "partial"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_CloudWatch.5",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
@@ -751,9 +754,10 @@
         "confidence": "partial"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_CloudWatch.6",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
@@ -784,9 +788,10 @@
         "confidence": "partial"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_CloudWatch.7",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
@@ -817,9 +822,10 @@
         "confidence": "partial"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_CloudWatch.8",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
@@ -850,9 +856,10 @@
         "confidence": "partial"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_CloudWatch.9",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
@@ -883,9 +890,10 @@
         "confidence": "partial"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_CloudWatch.10",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
@@ -916,9 +924,10 @@
         "confidence": "partial"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_CloudWatch.11",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
@@ -949,9 +958,10 @@
         "confidence": "partial"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_CloudWatch.12",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
@@ -982,9 +992,10 @@
         "confidence": "partial"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_CloudWatch.13",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
@@ -1015,9 +1026,10 @@
         "confidence": "partial"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_CloudWatch.14",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
