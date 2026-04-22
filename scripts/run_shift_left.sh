@@ -4,11 +4,16 @@ set -euo pipefail
 # ---------------------------------------------------------------------------
 # run_shift_left.sh — Scan CIS scenario folders with Checkov, Trivy, and KICS
 #
+# Folder convention:
+#   scenarios/<Section>/<CIS_ID>_<description>/
+#   e.g. scenarios/Monitoring/CloudWatch.1_root_usage_alarm/
+#
 # Usage:
 #   ./run_shift_left.sh --section Monitoring
 #   ./run_shift_left.sh --section S3
 #   ./run_shift_left.sh --control CloudWatch.1
 #   ./run_shift_left.sh --all
+#   ./run_shift_left.sh --baseline
 # ---------------------------------------------------------------------------
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -35,12 +40,13 @@ Options:
   --section <SECTION>   Scan all controls in a section (e.g. Monitoring, S3, IAM)
   --control <CIS_ID>    Scan a single control (e.g. CloudWatch.1, S3.5)
   --all                 Scan all controls in the matrix
+  --baseline            Scan only _base folders for each section (FPR measurement)
 
 Examples:
-  ./run_shift_left.sh --section Monitoring
-  ./run_shift_left.sh --section S3
-  ./run_shift_left.sh --control CloudWatch.1
-  ./run_shift_left.sh --all
+  ./scripts/run_shift_left.sh --section Monitoring
+  ./scripts/run_shift_left.sh --control CloudWatch.1
+  ./scripts/run_shift_left.sh --all
+  ./scripts/run_shift_left.sh --baseline
 EOF
 }
 
@@ -69,6 +75,9 @@ case "$1" in
     --all)
         MODE="all"
         ;;
+    --baseline)
+        MODE="baseline"
+        ;;
     -h|--help)
         usage
         exit 0
@@ -81,10 +90,28 @@ case "$1" in
 esac
 
 # ---------------------------------------------------------------------------
-# Build list of controls to process as a JSON array of {cis_id, section}
+# Helper: find scenario folder for a given cis_id and section.
+# Matches folders starting with exact cis_id followed by _ or end of name.
+# Excludes _base folders.
+# ---------------------------------------------------------------------------
+find_scenario_dir() {
+    local cis_id="$1"
+    local section="$2"
+    local base_path="$REPO_ROOT/scenarios/${section}"
+
+    find "$base_path" -maxdepth 1 -type d \
+        \( -name "${cis_id}_*" -o -name "${cis_id}" \) \
+        2>/dev/null \
+        | grep -v '_base' \
+        | head -1 \
+        || true
+}
+
+# ---------------------------------------------------------------------------
+# Build list of controls as a JSON array of {cis_id, section}
 # ---------------------------------------------------------------------------
 case "$MODE" in
-    all)
+    all|baseline)
         CONTROLS=$(jq -c '[.controls[] | {cis_id, section}]' "$MATRIX_FILE")
         ;;
     section)
@@ -116,7 +143,7 @@ mkdir -p \
     "$REPO_ROOT/results/kics"
 
 # ---------------------------------------------------------------------------
-# Helper: get non-null, non-CHANGE_ rule IDs for a control+tool as JSON array
+# Helper: get non-null, non-CHANGE_ rule IDs for a control+tool as JSON array.
 # Handles rule_id that is a string, an array, or null.
 # ---------------------------------------------------------------------------
 get_rule_ids() {
@@ -144,27 +171,33 @@ print_summary() {
     local cis_id="$2"
     local status="$3"
     local matched="$4"
-    printf "%-10s | %-20s | %-4s | %s\n" "$tool" "$cis_id" "$status" "$matched"
+    printf "%-10s | %-28s | %-4s | %s\n" "$tool" "$cis_id" "$status" "$matched"
 }
 
 # ---------------------------------------------------------------------------
 # Checkov — Docker
+# BASELINE_MODE=1 skips rule_id matching and just reports finding counts.
 # ---------------------------------------------------------------------------
 run_checkov() {
     local cis_id="$1"
-    local section="$2"
-    local scenario_dir="$REPO_ROOT/scenarios/$section/$cis_id"
+    local scenario_dir="$2"
+    local baseline_mode="${3:-0}"
     local output_file="$REPO_ROOT/results/checkov/checkov__${cis_id}.json"
 
-    [[ -d "$scenario_dir" ]] || return 0
-
-    local _exit=0
     docker run --rm \
         -v "${REPO_ROOT}:/src" \
         "$CHECKOV_IMAGE" \
-        -d "/src/scenarios/${section}/${cis_id}" \
+        -d "/src/$(realpath --relative-to="$REPO_ROOT" "$scenario_dir")" \
         --output json --quiet \
-        > "$output_file" 2>/dev/null || _exit=$?
+        2>/dev/null > "$output_file" || true
+
+    if [[ "$baseline_mode" == "1" ]]; then
+        local failed passed
+        failed=$(jq '.results.failed_checks | length' "$output_file" 2>/dev/null || echo "?")
+        passed=$(jq '.results.passed_checks | length' "$output_file" 2>/dev/null || echo "?")
+        print_summary "checkov" "$cis_id" "BASE" "passed=${passed} failed=${failed}"
+        return 0
+    fi
 
     local rule_ids
     rule_ids=$(get_rule_ids "$cis_id" "checkov")
@@ -198,19 +231,31 @@ run_checkov() {
 }
 
 # ---------------------------------------------------------------------------
-# Trivy — native binary
+# Trivy — native binary (apt 0.69.3)
+# BASELINE_MODE=1 skips rule_id matching and just reports finding counts.
 # ---------------------------------------------------------------------------
 run_trivy() {
     local cis_id="$1"
-    local section="$2"
-    local scenario_dir="$REPO_ROOT/scenarios/$section/$cis_id"
+    local scenario_dir="$2"
+    local baseline_mode="${3:-0}"
     local output_file="$REPO_ROOT/results/trivy/trivy__${cis_id}.json"
 
-    [[ -d "$scenario_dir" ]] || return 0
+    if ! command -v trivy &>/dev/null; then
+        print_summary "trivy" "$cis_id" "ERR" "trivy binary not found"
+        return 0
+    fi
 
-    local _exit=0
-    trivy config "$scenario_dir" --format json \
-        > "$output_file" 2>/dev/null || _exit=$?
+    trivy config "$scenario_dir" \
+        --format json \
+        --quiet \
+        2>/dev/null > "$output_file" || true
+
+    if [[ "$baseline_mode" == "1" ]]; then
+        local count
+        count=$(jq '[.Results[].Misconfigurations[]?] | length' "$output_file" 2>/dev/null || echo "?")
+        print_summary "trivy" "$cis_id" "BASE" "misconfigurations=${count}"
+        return 0
+    fi
 
     local rule_ids
     rule_ids=$(get_rule_ids "$cis_id" "trivy")
@@ -242,31 +287,37 @@ run_trivy() {
 
 # ---------------------------------------------------------------------------
 # KICS — Docker, two volumes
+# BASELINE_MODE=1 skips rule_id matching and just reports finding counts.
 # ---------------------------------------------------------------------------
 run_kics() {
     local cis_id="$1"
-    local section="$2"
-    local scenario_dir="$REPO_ROOT/scenarios/$section/$cis_id"
+    local scenario_dir="$2"
+    local baseline_mode="${3:-0}"
     local kics_out_dir="$REPO_ROOT/results/kics"
     local tmp_results="$kics_out_dir/results.json"
     local output_file="$kics_out_dir/kics__${cis_id}.json"
 
-    [[ -d "$scenario_dir" ]] || return 0
-
     rm -f "$tmp_results"
 
-    local _exit=0
     docker run --rm \
         -v "${scenario_dir}:/src" \
         -v "${kics_out_dir}:/output" \
         "$KICS_IMAGE" \
         scan -p /src --report-formats json -o /output \
-        > /dev/null 2>&1 || _exit=$?
+        > /dev/null 2>&1 || true
 
     if [[ -f "$tmp_results" ]]; then
         mv "$tmp_results" "$output_file"
     else
         echo '{"queries":[]}' > "$output_file"
+    fi
+
+    if [[ "$baseline_mode" == "1" ]]; then
+        local count
+        count=$(jq '[.queries[]? | select((.files | length) > 0)] | length' \
+            "$output_file" 2>/dev/null || echo "?")
+        print_summary "kics" "$cis_id" "BASE" "queries_triggered=${count}"
+        return 0
     fi
 
     local rule_ids
@@ -277,7 +328,6 @@ run_kics() {
 
     if [[ -s "$output_file" ]] && [[ $(echo "$rule_ids" | jq 'length') -gt 0 ]]; then
         local hit
-        # query has files with issues → FAIL
         hit=$(jq -r --argjson rids "$rule_ids" '
             .queries[]?
             | select(.query_id as $id | $rids | index($id) != null)
@@ -288,7 +338,6 @@ run_kics() {
             status="FAIL"
             matched="$hit"
         else
-            # query present but no files → PASS with matched rule
             hit=$(jq -r --argjson rids "$rule_ids" '
                 .queries[]?
                 | select(.query_id as $id | $rids | index($id) != null)
@@ -304,6 +353,20 @@ run_kics() {
 }
 
 # ---------------------------------------------------------------------------
+# Scan a single scenario directory with all three tools.
+# Pass baseline_mode=1 to skip rule_id matching (used for _base folders).
+# ---------------------------------------------------------------------------
+scan_scenario() {
+    local cis_id="$1"
+    local scenario_dir="$2"
+    local baseline_mode="${3:-0}"
+
+    run_checkov "$cis_id" "$scenario_dir" "$baseline_mode"
+    run_trivy   "$cis_id" "$scenario_dir" "$baseline_mode"
+    run_kics    "$cis_id" "$scenario_dir" "$baseline_mode"
+}
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 echo "Shift-left scan — CIS AWS Foundations Benchmark v1.4.0"
@@ -311,20 +374,41 @@ echo "Matrix : $MATRIX_FILE"
 echo "Tools  : $TOOLS_FILE"
 echo "Checkov: $CHECKOV_IMAGE"
 echo "KICS   : $KICS_IMAGE"
-echo "Trivy  : native binary"
+echo "Trivy  : native binary (apt 0.69.3)"
 echo ""
-printf "%-10s | %-20s | %-4s | %s\n" "TOOL" "CIS_ID" "STAT" "RULE_ID"
-printf '%0.s-' {1..72}
+printf "%-10s | %-28s | %-4s | %s\n" "TOOL" "CIS_ID" "STAT" "RULE_ID"
+printf '%0.s-' {1..80}
 echo ""
 
-while IFS= read -r control; do
-    cis_id=$(echo "$control" | jq -r '.cis_id')
-    section=$(echo "$control" | jq -r '.section')
+if [[ "$MODE" == "baseline" ]]; then
+    # Skanuj _base dla każdej unikalnej sekcji — pomiar False Positive Rate.
+    # baseline_mode=1 pomija get_rule_ids i drukuje liczby zamiast match/no match.
+    while IFS= read -r section; do
+        base_dir="$REPO_ROOT/scenarios/${section}/_base"
+        if [[ -d "$base_dir" ]]; then
+            scan_scenario "_base_${section}" "$base_dir" "1"
+        else
+            printf "%-10s | %-28s | %-4s | %s\n" \
+                "SKIP" "_base_${section}" "---" "folder not found"
+        fi
+    done < <(echo "$CONTROLS" | jq -r '.[].section' | sort -u)
+else
+    # Skanuj scenariusze podatne
+    while IFS= read -r control; do
+        cis_id=$(echo "$control" | jq -r '.cis_id')
+        section=$(echo "$control" | jq -r '.section')
 
-    run_checkov "$cis_id" "$section"
-    run_trivy   "$cis_id" "$section"
-    run_kics    "$cis_id" "$section"
-done < <(echo "$CONTROLS" | jq -c '.[]')
+        scenario_dir=$(find_scenario_dir "$cis_id" "$section")
+
+        if [[ -z "$scenario_dir" ]]; then
+            printf "%-10s | %-28s | %-4s | %s\n" \
+                "SKIP" "$cis_id" "---" "folder not found"
+            continue
+        fi
+
+        scan_scenario "$cis_id" "$scenario_dir" "0"
+    done < <(echo "$CONTROLS" | jq -c '.[]')
+fi
 
 echo ""
 echo "Done. Results saved to $REPO_ROOT/results/"
