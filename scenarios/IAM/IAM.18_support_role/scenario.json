@@ -1,0 +1,14 @@
+{
+  "cis_id": "IAM.18",
+  "section": "IAM",
+  "level": 1,
+  "description": "Brak roli IAM z dołączoną polityką AWSSupportAccess",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": [
+    "aws_iam_role_policy_attachment.support"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "none"
+}

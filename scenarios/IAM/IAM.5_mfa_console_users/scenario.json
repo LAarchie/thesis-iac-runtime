@@ -1,0 +1,15 @@
+{
+  "cis_id": "IAM.5",
+  "section": "IAM",
+  "level": 1,
+  "description": "MFA nie jest wymuszone dla użytkowników IAM z hasłem do konsoli",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": [
+    "aws_iam_user.cis_test"
+  ],
+  "iac_testable": false,
+  "iac_limitation": "Powiązanie urządzenia MFA jest stanem operacyjnym — Terraform może tworzyć profile logowania, ale nie może wymuszać rejestracji MFA",
+  "operationally_testable": true,
+  "cost_risk": "none"
+}

@@ -1,0 +1,14 @@
+{
+  "cis_id": "IAM.1",
+  "section": "IAM",
+  "level": 1,
+  "description": "Polityka IAM przyznaje pełne uprawnienia administracyjne (Action: *)",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": [
+    "aws_iam_policy.cis_test"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "none"
+}

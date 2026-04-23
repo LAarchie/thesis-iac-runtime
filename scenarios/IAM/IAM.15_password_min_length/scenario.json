@@ -1,0 +1,14 @@
+{
+  "cis_id": "IAM.15",
+  "section": "IAM",
+  "level": 1,
+  "description": "Minimalna długość hasła IAM ustawiona na 8 (wymagane minimum to 14)",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": [
+    "aws_iam_account_password_policy.cis"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "none"
+}
