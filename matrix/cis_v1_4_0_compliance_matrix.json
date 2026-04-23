@@ -99,9 +99,9 @@
         "confidence": "verified"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_IAM.16",
-        "query_name": "IAM Password Reuse Prevention",
-        "confidence": "requires_verification"
+        "rule_id": "89806cdc-9c2e-4bd1-a0dc-53f339bcfb2a",
+        "query_name": "Password Without Reuse Prevention",
+        "confidence": "verified"
       },
       "prowler": {
         "check_id": "iam_password_policy_reuse_24",
@@ -126,14 +126,14 @@
         "confidence": "verified"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_IAM.18",
+        "rule_id": null,
         "resource": "aws_iam_role_policy_attachment",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_IAM.18",
+        "rule_id": null,
         "query_name": "Support Role Not Created",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable"
       },
       "prowler": {
         "check_id": "iam_support_role_created",
@@ -192,9 +192,9 @@
         "confidence": "partial"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_IAM.5",
+        "rule_id": null,
         "query_name": "MFA Not Enabled For IAM User",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable"
       },
       "prowler": {
         "check_id": "iam_user_mfa_enabled_console_access",
