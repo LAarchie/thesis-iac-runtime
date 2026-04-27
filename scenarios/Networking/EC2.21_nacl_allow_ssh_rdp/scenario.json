@@ -1,0 +1,14 @@
+{
+  "cis_id": "EC2.21",
+  "section": "Networking",
+  "level": 1,
+  "description": "NACL allows ingress from 0.0.0.0/0 to port 22 or 3389",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": [
+    "aws_network_acl_rule.allow_ssh"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "none"
+}

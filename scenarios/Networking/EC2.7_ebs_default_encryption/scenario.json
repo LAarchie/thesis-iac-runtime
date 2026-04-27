@@ -1,0 +1,14 @@
+{
+  "cis_id": "EC2.7",
+  "section": "Networking",
+  "level": 2,
+  "description": "EBS default encryption disabled",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": [
+    "aws_ebs_encryption_by_default.cis"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "none"
+}
