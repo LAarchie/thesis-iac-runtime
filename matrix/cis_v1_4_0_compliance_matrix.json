@@ -1106,6 +1106,35 @@
       }
     },
     {
+      "cis_id": "EC2.7",
+      "section": "Networking",
+      "level": 2,
+      "description": "EBS default encryption should be enabled",
+      "terraform_resource": ["aws_ebs_encryption_by_default"],
+      "iac_testable": true,
+      "operationally_testable": true,
+      "cost_risk": "none",
+      "checkov": {
+        "rule_id": "CKV2_AWS_7",
+        "resource": "aws_ebs_encryption_by_default",
+        "confidence": "verified"
+      },
+      "trivy": {
+        "rule_id": "CHANGE_Trivy_EC2.7",
+        "resource": "aws_ebs_encryption_by_default",
+        "confidence": "requires_verification"
+      },
+      "kics": {
+        "rule_id": "CHANGE_KICS_EC2.7",
+        "query_name": "EBS Default Encryption Disabled",
+        "confidence": "requires_verification"
+      },
+      "prowler": {
+        "check_id": "ec2_ebs_default_encryption_enabled",
+        "confidence": "verified"
+      }
+    },
+    {
       "cis_id": "EC2.21",
       "section": "Networking",
       "level": 1,
@@ -1138,13 +1167,13 @@
     }
   ],
   "summary": {
-    "total_controls": 34,
+    "total_controls": 35,
     "by_section": {
       "IAM": 7,
       "S3": 4,
       "Logging": 8,
       "Monitoring": 12,
-      "Networking": 3
+      "Networking": 4
     },
     "by_iac_testability": {
       "fully_testable": 27,
@@ -1164,8 +1193,8 @@
     },
     "requires_verification_count": {
       "Checkov": 0,
-      "Trivy": 16,
-      "KICS": 16,
+      "Trivy": 17,
+      "KICS": 17,
       "Prowler": 0
     }
   },
