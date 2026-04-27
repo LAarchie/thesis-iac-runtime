@@ -1,0 +1,15 @@
+{
+  "cis_id": "KMS.4",
+  "section": "Logging",
+  "level": 2,
+  "description": "KMS key rotation disabled",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": [
+    "aws_kms_key.cis"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "high",
+  "cost_note": "KMS key costs $1.00/month billed per started month"
+}

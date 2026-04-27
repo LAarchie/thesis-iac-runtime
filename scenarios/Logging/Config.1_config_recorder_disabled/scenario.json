@@ -1,0 +1,14 @@
+{
+  "cis_id": "Config.1",
+  "section": "Logging",
+  "level": 1,
+  "description": "AWS Config recorder disabled or not recording all resources",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": [
+    "aws_config_configuration_recorder.cis"
+  ],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "medium"
+}
