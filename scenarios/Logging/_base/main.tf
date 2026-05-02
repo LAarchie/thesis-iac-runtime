@@ -134,32 +134,9 @@ resource "aws_cloudtrail" "main" {
 }
 
 # Config.1 — AWS Config enabled with all resource types
-resource "aws_iam_role" "config" {
-  name = "cis-config-role"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [{
-      Effect    = "Allow"
-      Principal = { Service = "config.amazonaws.com" }
-      Action    = "sts:AssumeRole"
-    }]
-  })
-
-  tags = {
-    Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "compliant"
-    ResearchID = "Logging"
-  }
-}
-
-resource "aws_iam_role_policy_attachment" "config" {
-  role       = aws_iam_role.config.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWS_ConfigRole"
-}
-
 resource "aws_config_configuration_recorder" "main" {
   name     = "cis-config-recorder"
-  role_arn = aws_iam_role.config.arn
+  role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/config.amazonaws.com/AWSServiceRoleForConfig"
 
   recording_group {
     all_supported                 = true
