@@ -10,5 +10,6 @@
   ],
   "iac_testable": true,
   "operationally_testable": true,
-  "cost_risk": "medium"
+  "cost_risk": "medium",
+  "iac_limitation": "service linked role is an account state related requirement - not testable by IaC Tools"
 }
