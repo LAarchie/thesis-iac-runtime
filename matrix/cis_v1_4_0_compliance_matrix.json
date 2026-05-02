@@ -579,19 +579,20 @@
       "cost_risk": "medium",
       "cost_note": "$0.003 per configuration item recorded. Stop recorder before destroy.",
       "checkov": {
-        "rule_id": "CKV_AWS_121",
+        "rule_id": "CKV2_AWS_48",
         "resource": "aws_config_configuration_recorder",
-        "confidence": "verified"
+        "confidence": "verified",
+        "note": "CKV_AWS_121 nie wykrywa naruszenia — ani przy błędnej konfiguracji ani przy braku zasobu. CKV2_AWS_48 wykrywa all_supported=false ale nie wykrywa całkowitego braku aws_config_configuration_recorder."
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_Config.1",
+        "rule_id": null,
         "resource": "aws_config_configuration_recorder",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_Config.1",
+        "rule_id": null,
         "query_name": "Config Recorder Disabled",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable"
       },
       "prowler": {
         "check_id": "config_recorder_all_regions_enabled",
@@ -616,14 +617,14 @@
         "confidence": "verified"
       },
       "trivy": {
-        "rule_id": "AVD-AWS-0065",
+        "rule_id": "AWS-0065",
         "resource": "aws_kms_key",
         "confidence": "verified"
       },
       "kics": {
-        "rule_id": "7c0f8b5a-2d4e-4f1c-9a3b-6e8d2c7f4e1a",
-        "query_name": "KMS Key Rotation Disabled",
-        "confidence": "requires_verification"
+        "rule_id": "22fbfeac-7b5a-421a-8a27-7a2178bb910b",
+        "query_name": "CMK Rotation Disabled",
+        "confidence": "verified"
       },
       "prowler": {
         "check_id": "kms_cmk_rotation_enabled",
@@ -1183,7 +1184,7 @@
     "by_confidence": {
       "verified": 18,
       "partial": 14,
-      "requires_verification": 22
+      "requires_verification": 19
     },
     "by_cost_risk": {
       "none": 20,
@@ -1193,8 +1194,8 @@
     },
     "requires_verification_count": {
       "Checkov": 0,
-      "Trivy": 17,
-      "KICS": 17,
+      "Trivy": 16,
+      "KICS": 15,
       "Prowler": 0
     }
   },
