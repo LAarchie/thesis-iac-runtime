@@ -21,8 +21,8 @@ resource "aws_s3_bucket" "trail" {
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "compliant"
-    ResearchID = "Logging"
+    Scenario   = "vulnerable"
+    ResearchID = "Config.1"
   }
 }
 
@@ -71,8 +71,8 @@ resource "aws_cloudwatch_log_group" "cloudtrail" {
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "compliant"
-    ResearchID = "Logging"
+    Scenario   = "vulnerable"
+    ResearchID = "Config.1"
   }
 }
 
@@ -90,8 +90,8 @@ resource "aws_iam_role" "cloudtrail_cw" {
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "compliant"
-    ResearchID = "Logging"
+    Scenario   = "vulnerable"
+    ResearchID = "Config.1"
   }
 }
 
@@ -128,12 +128,12 @@ resource "aws_cloudtrail" "main" {
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "compliant"
-    ResearchID = "Logging"
+    Scenario   = "vulnerable"
+    ResearchID = "Config.1"
   }
 }
 
-# Config.1 — AWS Config enabled with all resource types
+# Config.1 — VULNERABLE: all_supported=false (nie nagrywa wszystkich zasobów)
 resource "aws_config_configuration_recorder" "main" {
   name     = "cis-config-recorder"
   role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/aws-service-role/config.amazonaws.com/AWSServiceRoleForConfig"
