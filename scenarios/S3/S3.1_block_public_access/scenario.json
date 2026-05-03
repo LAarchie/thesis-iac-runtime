@@ -1,0 +1,12 @@
+{
+  "cis_id": "S3.1",
+  "section": "S3",
+  "level": 2,
+  "description": "S3 bucket block public access disabled",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": ["aws_s3_bucket_public_access_block.cis"],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "none"
+}

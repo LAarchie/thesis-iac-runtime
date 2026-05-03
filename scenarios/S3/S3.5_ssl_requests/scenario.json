@@ -1,0 +1,12 @@
+{
+  "cis_id": "S3.5",
+  "section": "S3",
+  "level": 1,
+  "description": "S3 bucket policy allows HTTP requests",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": ["aws_s3_bucket_policy.cis"],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "none"
+}

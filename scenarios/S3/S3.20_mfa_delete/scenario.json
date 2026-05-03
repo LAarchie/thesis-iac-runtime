@@ -1,0 +1,13 @@
+{
+  "cis_id": "S3.20",
+  "section": "S3",
+  "level": 2,
+  "description": "S3 bucket versioning resource absent — MFA Delete not configured",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": ["aws_s3_bucket_versioning.cis"],
+  "iac_testable": false,
+  "operationally_testable": true,
+  "cost_risk": "none",
+  "iac_limitation": "MFA Delete wymaga root account z MFA — nie można skonfigurować przez standardowy Terraform provider. Narzędzia IaC sprawdzają tylko obecność bloku versioning."
+}

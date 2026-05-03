@@ -1,6 +1,6 @@
 data "aws_caller_identity" "current" {}
 
-# S3.1 i S3.8 — Block public access na poziomie bucketu
+# S3.8 — Brak bloku public access (resource usunięty)
 resource "aws_s3_bucket" "cis" {
   bucket        = "cis-s3-test-${data.aws_caller_identity.current.account_id}"
   force_destroy = true
@@ -8,16 +8,8 @@ resource "aws_s3_bucket" "cis" {
   tags = {
     Standard   = "CIS-AWS-1.4.0"
     Scenario   = "vulnerable"
-    ResearchID = "S3.1"
+    ResearchID = "S3.8"
   }
-}
-
-resource "aws_s3_bucket_public_access_block" "cis" {
-  bucket                  = aws_s3_bucket.cis.id
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
 }
 
 # S3.5 — Wymuszanie HTTPS (deny HTTP)
@@ -39,7 +31,6 @@ resource "aws_s3_bucket_policy" "cis" {
       }
     }]
   })
-  depends_on = [aws_s3_bucket_public_access_block.cis]
 }
 
 # S3.20 — Versioning włączone (MFA Delete wymaga root+MFA,
