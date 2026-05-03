@@ -582,17 +582,18 @@
         "rule_id": "CKV2_AWS_48",
         "resource": "aws_config_configuration_recorder",
         "confidence": "verified",
-        "note": "CKV_AWS_121 nie wykrywa naruszenia — ani przy błędnej konfiguracji ani przy braku zasobu. CKV2_AWS_48 wykrywa all_supported=false ale nie wykrywa całkowitego braku aws_config_configuration_recorder."
+        "note": "CKV2_AWS_48 wykrywa all_supported=false ale nie wykrywa całkowitego braku aws_config_configuration_recorder."
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_config_configuration_recorder",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "note": "Trivy nie posiada reguły dla AWS Config recorder. Brak wykrycia potwierdzony testami scenariusza Config.1_config_recorder_disabled."
       },
       "kics": {
         "rule_id": null,
-        "query_name": "Config Recorder Disabled",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "note": "KICS nie posiada zapytania dla AWS Config recorder. Brak wykrycia potwierdzony testami scenariusza Config.1_config_recorder_disabled."
       },
       "prowler": {
         "check_id": "config_recorder_all_regions_enabled",
