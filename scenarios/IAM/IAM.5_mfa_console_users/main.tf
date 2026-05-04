@@ -13,7 +13,7 @@ resource "aws_iam_policy" "cis_test" {
   tags = {
     Standard   = "CIS-AWS-1.4.0"
     Scenario   = "vulnerable"
-    ResearchID = "IAM"
+    ResearchID = "IAM.5"
   }
 }
 
@@ -43,7 +43,7 @@ resource "aws_iam_role" "support" {
   tags = {
     Standard   = "CIS-AWS-1.4.0"
     Scenario   = "vulnerable"
-    ResearchID = "IAM"
+    ResearchID = "IAM.5"
   }
 }
 

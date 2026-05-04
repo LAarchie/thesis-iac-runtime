@@ -1,6 +1,7 @@
 resource "aws_iam_policy" "cis_test" {
   name = "cis-test-policy"
 
+#Allows full '*' privileges
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -13,7 +14,7 @@ resource "aws_iam_policy" "cis_test" {
   tags = {
     Standard   = "CIS-AWS-1.4.0"
     Scenario   = "vulnerable"
-    ResearchID = "IAM"
+    ResearchID = "IAM.1"
   }
 }
 
@@ -43,7 +44,7 @@ resource "aws_iam_role" "support" {
   tags = {
     Standard   = "CIS-AWS-1.4.0"
     Scenario   = "vulnerable"
-    ResearchID = "IAM"
+    ResearchID = "IAM.1"
   }
 }
 
@@ -58,6 +59,6 @@ resource "aws_iam_user" "cis_test" {
   tags = {
     Standard   = "CIS-AWS-1.4.0"
     Scenario   = "vulnerable"
-    ResearchID = "IAM"
+    ResearchID = "IAM.1"
   }
 }

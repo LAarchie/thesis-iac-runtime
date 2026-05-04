@@ -16,7 +16,7 @@ resource "aws_iam_policy" "cis_test" {
     ResearchID = "IAM"
   }
 }
-
+#Password_reuse_prevention not set to 24 = fails
 resource "aws_iam_account_password_policy" "cis" {
   minimum_password_length        = 14
   password_reuse_prevention      = 0
