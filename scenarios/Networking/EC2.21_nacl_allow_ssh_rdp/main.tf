@@ -18,6 +18,7 @@ resource "aws_network_acl" "cis" {
   }
 }
 
+#Allow SSH (port 22) and RDP (port 3389)
 resource "aws_network_acl_rule" "allow_ssh" {
   network_acl_id = aws_network_acl.cis.id
   rule_number    = 100
@@ -26,4 +27,14 @@ resource "aws_network_acl_rule" "allow_ssh" {
   cidr_block     = "0.0.0.0/0"
   from_port      = 22
   to_port        = 22
+}
+
+resource "aws_network_acl_rule" "allow_rdp" {
+  network_acl_id = aws_network_acl.cis.id
+  rule_number    = 110
+  protocol       = "tcp"
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 3389
+  to_port        = 3389
 }
