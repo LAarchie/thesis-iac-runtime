@@ -244,21 +244,29 @@
           "CKV_AWS_53",
           "CKV_AWS_54",
           "CKV_AWS_55",
-          "CKV_AWS_56"
+          "CKV_AWS_56",
+          "CKV2_AWS_6"
         ],
         "resource": "aws_s3_bucket_public_access_block",
-        "confidence": "verified"
+        "confidence": "verified",
+        "note": "CKV2_AWS_6 pojawia się również przy błędnej konfiguracji aws_s3_bucket_public_access_block (wszystkie flagi ustawione na false), jednak semantycznie należy do S3.8 — sprawdza obecność zasobu, nie jego konfigurację. Dodano do S3.1 dla kompletności pipeline analitycznego."
       },
       "trivy": {
         "rule_id": [
           "AVD-AWS-0086",
-          "AVD-AWS-0087"
+          "AVD-AWS-0087",
+          "AVD-AWS-0091",
+          "AVD-AWS-0093"
         ],
         "resource": "aws_s3_bucket_public_access_block",
         "confidence": "verified"
       },
       "kics": {
-        "rule_id": "1a4bc881-9f69-4d44-8c9a-d37d08f54c55",
+        "rule_id": [
+          "d0cc8694-fcad-43ff-ac86-32331d7e867f",
+          "1a4bc881-9f69-4d44-8c9a-d37d08f54c50",
+          "4fa66806-0dd9-4f8d-9480-3174d39c7c91"
+        ],
         "query_name": "S3 Bucket Block Public Access Disabled",
         "confidence": "verified"
       },
@@ -312,17 +320,26 @@
       "checkov": {
         "rule_id": "CKV2_AWS_6",
         "resource": "aws_s3_bucket_public_access_block",
-        "confidence": "verified"
+        "confidence": "verified",
+        "note": "CKV2_AWS_6 wyzwala się przez brak bloku aws_s3_bucket_public_access_block. Reguły granularne (CKV_AWS_53-56) sprawdzające poszczególne parametry bloku nie pojawiają się — brak zasobu oznacza brak atrybutów do sprawdzenia."
       },
       "trivy": {
-        "rule_id": "AVD-AWS-0086",
+        "rule_id": [
+          "AVD-AWS-0086",
+          "AVD-AWS-0087",
+          "AVD-AWS-0091",
+          "AVD-AWS-0093",
+          "AVD-AWS-0094"
+        ],
         "resource": "aws_s3_bucket_public_access_block",
-        "confidence": "verified"
+        "confidence": "verified",
+        "note": "AVD-AWS-0094 jest unikalne dla S3.8 (brak zasobu aws_s3_bucket_public_access_block) i nie pojawia się w S3.1 gdzie zasób istnieje ale z błędną konfiguracją. Pozostałe ID pokrywają się z S3.1."
       },
       "kics": {
-        "rule_id": "1a4bc881-9f69-4d44-8c9a-d37d08f54c55",
+        "rule_id": null,
         "query_name": "S3 Bucket Block Public Access Disabled",
-        "confidence": "verified"
+        "confidence": "not_applicable",
+        "note": "KICS nie wykrywa braku zasobu aws_s3_bucket_public_access_block — reguły sprawdzają wyłącznie wartości atrybutów istniejącego zasobu. Brak zasobu oznacza brak atrybutów do sprawdzenia."
       },
       "prowler": {
         "check_id": "s3_bucket_public_access_block_bucket_settings",
@@ -342,19 +359,22 @@
       "iac_limitation": "MFA Delete requires root account with MFA — cannot be configured via standard Terraform provider",
       "cost_risk": "none",
       "checkov": {
-        "rule_id": "CKV_AWS_300",
+        "rule_id": null,
         "resource": "aws_s3_bucket_versioning",
-        "confidence": "verified"
+        "confidence": "not_applicable",
+        "note": "MFA Delete wymaga uwierzytelnienia root account z fizycznym tokenem MFA — nie można skonfigurować przez standardowy AWS Terraform provider. Żadne narzędzie IaC scanning nie posiada funkcjonalnej reguły weryfikującej MFA Delete w sposób umożliwiający odróżnienie scenariusza zgodnego od podatnego."
       },
       "trivy": {
-        "rule_id": "AVD-AWS-0089",
+        "rule_id": null,
         "resource": "aws_s3_bucket_versioning",
-        "confidence": "verified"
+        "confidence": "not_applicable",
+        "note": "MFA Delete wymaga uwierzytelnienia root account z fizycznym tokenem MFA — nie można skonfigurować przez standardowy AWS Terraform provider. Żadne narzędzie IaC scanning nie posiada funkcjonalnej reguły weryfikującej MFA Delete w sposób umożliwiający odróżnienie scenariusza zgodnego od podatnego."
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_S3.20",
+        "rule_id": null,
         "query_name": "S3 MFA Delete Disabled",
-        "confidence": "requires_verification"
+        "confidence": "not_applicable",
+        "note": "Reguła c5b31ab9 (S3 Bucket Without Enabled MFA Delete) pojawia się w baseline i wszystkich scenariuszach S3 — jest stałym szumem, nie specyficznym wykryciem S3.20. MFA Delete nie można skonfigurować przez standardowy AWS Terraform provider, dlatego KICS flaguje każdy bucket bez MFA Delete niezależnie od scenariusza."
       },
       "prowler": {
         "check_id": "s3_bucket_mfa_delete_enabled",
