@@ -32,13 +32,13 @@
         "confidence": "verified"
       },
       "trivy": {
-        "rule_id": "AVD-AWS-0057",
+        "rule_id": null,
         "resource": "aws_iam_policy",
-        "confidence": "verified"
+        "confidence": "not applicable"
       },
       "kics": {
-        "rule_id": "b4378389-a9aa-44ee-91e7-ef183f11079e",
-        "query_name": "IAM Policies With Full Privileges",
+        "rule_id": ["575a2155-6af1-4026-b1af-d5bc8fe2a904", "2f37c4a3-58b9-4afe-8a87-d7f1d2286f84"],
+        "query_name": ["IAM Policy Grants Full Permissions", "IAM Policies With Full Privileges"],
         "confidence": "verified"
       },
       "prowler": {
@@ -58,17 +58,17 @@
       "operationally_testable": true,
       "cost_risk": "none",
       "checkov": {
-        "rule_id": "CKV_AWS_9",
+        "rule_id": "CKV_AWS_10",
         "resource": "aws_iam_account_password_policy",
         "confidence": "verified"
       },
       "trivy": {
-        "rule_id": "AVD-AWS-0056",
+        "rule_id": "AWS-0063",
         "resource": "aws_iam_account_password_policy",
         "confidence": "verified"
       },
       "kics": {
-        "rule_id": "9ed08290-b951-4471-bde9-6f667f032abc",
+        "rule_id": "1bc1c685-e593-450e-88fb-19db4c82aa1d",
         "query_name": "IAM Password Without Minimum Length",
         "confidence": "verified"
       },
@@ -89,12 +89,12 @@
       "operationally_testable": true,
       "cost_risk": "none",
       "checkov": {
-        "rule_id": "CKV_AWS_13",
+        "rule_id": null,
         "resource": "aws_iam_account_password_policy",
-        "confidence": "verified"
+        "confidence": "not applicable"
       },
       "trivy": {
-        "rule_id": "AVD-AWS-0056",
+        "rule_id": "AWS-0056",
         "resource": "aws_iam_account_password_policy",
         "confidence": "verified"
       },
@@ -121,9 +121,9 @@
       "operationally_testable": true,
       "cost_risk": "none",
       "checkov": {
-        "rule_id": "CKV_AWS_274",
+        "rule_id": null,
         "resource": "aws_iam_role_policy_attachment",
-        "confidence": "verified"
+        "confidence": "not applicable"
       },
       "trivy": {
         "rule_id": null,
@@ -139,6 +139,7 @@
         "check_id": "iam_support_role_created",
         "confidence": "verified"
       }
+      
     },
     {
       "cis_id": "IAM.3",
@@ -182,14 +183,14 @@
       "iac_limitation": "MFA device association is an operational state — Terraform can create login profiles but cannot enforce MFA enrollment",
       "cost_risk": "none",
       "checkov": {
-        "rule_id": "CKV_AWS_40",
+        "rule_id": null,
         "resource": "aws_iam_user",
-        "confidence": "partial"
+        "confidence": "not_applicable"
       },
       "trivy": {
-        "rule_id": "AVD-AWS-0123",
+        "rule_id": null,
         "resource": "aws_iam_user",
-        "confidence": "partial"
+        "confidence": "not applicable"
       },
       "kics": {
         "rule_id": null,
