@@ -1,0 +1,12 @@
+{
+  "cis_id": "EC2.2",
+  "section": "Networking",
+  "level": 1,
+  "description": "VPC default security group allows inbound and outbound traffic",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": ["aws_default_security_group.cis"],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "none"
+}

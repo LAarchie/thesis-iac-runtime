@@ -1,0 +1,13 @@
+{
+  "cis_id": "EC2.6",
+  "section": "Networking",
+  "level": 2,
+  "description": "VPC Flow Logs not enabled — aws_flow_log resource absent",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": ["aws_flow_log.main"],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "low",
+  "cost_note": "VPC Flow Logs $0.50/GB. Minimal dla pustego testowego VPC bez ruchu."
+}
