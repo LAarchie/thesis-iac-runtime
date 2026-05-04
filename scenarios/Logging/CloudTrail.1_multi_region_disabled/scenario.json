@@ -1,0 +1,13 @@
+{
+  "cis_id": "CloudTrail.1",
+  "section": "Logging",
+  "level": 1,
+  "description": "CloudTrail trail is not multi-region and does not include global service events",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": ["aws_cloudtrail.main"],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "medium",
+  "cost_note": "CloudTrail multi-region begins logging immediately. Stop logging before destroy."
+}

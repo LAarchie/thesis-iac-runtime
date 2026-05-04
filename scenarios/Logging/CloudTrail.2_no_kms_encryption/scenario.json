@@ -1,0 +1,13 @@
+{
+  "cis_id": "CloudTrail.2",
+  "section": "Logging",
+  "level": 2,
+  "description": "CloudTrail logs are not encrypted with KMS CMK",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": ["aws_cloudtrail.main"],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "high",
+  "cost_note": "KMS key costs $1.00/month billed per started month. Always destroy promptly."
+}

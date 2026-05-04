@@ -1,0 +1,13 @@
+{
+  "cis_id": "CloudTrail.7",
+  "section": "Logging",
+  "level": 2,
+  "description": "S3 bucket access logging disabled on CloudTrail S3 bucket",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": ["aws_s3_bucket_logging.trail"],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "low",
+  "cost_note": "Access logs generate additional S3 objects. Use force_destroy=true on test buckets."
+}

@@ -1,0 +1,13 @@
+{
+  "cis_id": "CloudTrail.4",
+  "section": "Logging",
+  "level": 2,
+  "description": "CloudTrail log file validation disabled",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": ["aws_cloudtrail.main"],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "medium",
+  "cost_note": "Depends on CloudTrail being active. Stop logging before destroy."
+}

@@ -1,0 +1,13 @@
+{
+  "cis_id": "CloudTrail.6",
+  "section": "Logging",
+  "level": 1,
+  "description": "S3 bucket storing CloudTrail logs is publicly accessible",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "changed_resources": ["aws_s3_bucket_public_access_block.trail"],
+  "iac_testable": true,
+  "operationally_testable": true,
+  "cost_risk": "low",
+  "cost_note": "S3 bucket only — negligible cost."
+}

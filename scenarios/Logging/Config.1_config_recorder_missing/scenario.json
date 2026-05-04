@@ -1,0 +1,17 @@
+{
+  "cis_id": "Config.1",
+  "section": "Logging",
+  "level": 1,
+  "description": "AWS Config recorder completely absent",
+  "ground_truth": "FAIL",
+  "scenario": "vulnerable",
+  "removed_resources": [
+    "aws_config_configuration_recorder.main",
+    "aws_config_delivery_channel.main"
+  ],
+  "iac_testable": false,
+  "operationally_testable": true,
+  "cost_risk": "medium",
+  "variant": "missing_recorder",
+  "iac_limitation": "Narzędzia shift-left nie wykrywają braku zasobu — tylko błędną konfigurację istniejącego. Prowler wykrywa brak Config przez AWS API niezależnie od kodu IaC."
+}
