@@ -1,4 +1,3 @@
-data "aws_caller_identity" "current" {}
 
 # EC2.6 — VULNERABLE: VPC bez Flow Logs
 resource "aws_vpc" "cis" {

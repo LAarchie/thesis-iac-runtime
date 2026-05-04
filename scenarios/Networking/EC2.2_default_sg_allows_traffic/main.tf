@@ -1,5 +1,3 @@
-data "aws_caller_identity" "current" {}
-
 # VPC potrzebne do aws_default_security_group
 resource "aws_vpc" "cis" {
   cidr_block = "10.0.0.0/16"
