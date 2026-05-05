@@ -1089,17 +1089,22 @@
       "checkov": {
         "rule_id": "CKV2_AWS_12",
         "resource": "aws_default_security_group",
-        "confidence": "verified"
+        "confidence": "verified",
+        "note": "CKV2_AWS_11 | Ensure VPC flow logging is enabled in all VPCs - też jest wywoływane w scenariuszu EC2.2"
       },
       "trivy": {
-        "rule_id": "AVD-AWS-0041",
+        "rule_id": ["AWS-0104", "AWS-0107"],
         "resource": "aws_default_security_group",
-        "confidence": "verified"
+        "confidence": "verified",
+        "note": "AWS-0124 | Missing description for security group rule, AWS-0178 | VPC Flow Logs — VPC Flow Logs should be enabled for packet 'Rejects' również wywoływane dla scenariusza EC2.2"
       },
       "kics": {
-        "rule_id": "9a4ef195-74b9-4c58-b8ed-2b2fe4353a75",
-        "query_name": "VPC Default Security Group With Traffic",
-        "confidence": "verified"
+        "rule_id": 
+        ["46883ce1-dc3e-4b17-9195-c6a601624c73",
+        "9a4ef195-74b9-4c58-b8ed-2b2fe4353a75"],
+        "query_name": ["VPC Default Security Group With Traffic"],
+        "confidence": "verified",
+        "note": "f83121ea-03da-434f-9277-9cd247ab3047 VPC FlowLogs Disabled też dla EC2.2 (raczej EC2.6)"
       },
       "prowler": {
         "check_id": "ec2_securitygroup_default_restrict_traffic",
@@ -1122,15 +1127,16 @@
       "checkov": {
         "rule_id": "CKV2_AWS_11",
         "resource": "aws_vpc",
-        "confidence": "verified"
+        "confidence": "verified",
+        "note": "wyzwalane są jednakowe rule_id jak dla EC2.2"
       },
       "trivy": {
-        "rule_id": "AVD-AWS-0046",
+        "rule_id": "AWS-0178",
         "resource": "aws_vpc",
         "confidence": "verified"
       },
       "kics": {
-        "rule_id": "b0d8f392-f53d-4d63-b4b5-b82d9d5d3a8e",
+        "rule_id": "f83121ea-03da-434f-9277-9cd247ab3047",
         "query_name": "VPC Flow Logs Disabled",
         "confidence": "verified"
       },
@@ -1149,19 +1155,19 @@
       "operationally_testable": true,
       "cost_risk": "none",
       "checkov": {
-        "rule_id": "CKV2_AWS_7",
+        "rule_id": "CKV_AWS_106",
         "resource": "aws_ebs_encryption_by_default",
         "confidence": "verified"
       },
       "trivy": {
-        "rule_id": "CHANGE_Trivy_EC2.7",
+        "rule_id": null,
         "resource": "aws_ebs_encryption_by_default",
-        "confidence": "requires_verification"
+        "confidence": "not applicable"
       },
       "kics": {
-        "rule_id": "CHANGE_KICS_EC2.7",
+        "rule_id": "3d3f6270-546b-443c-adb4-bb6fb2187ca6",
         "query_name": "EBS Default Encryption Disabled",
-        "confidence": "requires_verification"
+        "confidence": "verified"
       },
       "prowler": {
         "check_id": "ec2_ebs_default_encryption_enabled",
@@ -1180,19 +1186,22 @@
       "operationally_testable": true,
       "cost_risk": "none",
       "checkov": {
-        "rule_id": "CKV_AWS_229",
+        "rule_id": ["CKV_AWS_231", "CKV_AWS_232"],
         "resource": "aws_network_acl_rule",
-        "confidence": "verified"
+        "confidence": "verified",
+        "note": "Również wyzwala rule id jak dla EC2.2 i EC2.6 (CKV2_AWS_(11/12)"
       },
       "trivy": {
-        "rule_id": "AVD-AWS-0102",
+        "rule_id": "AWS-0105",
         "resource": "aws_network_acl_rule",
-        "confidence": "verified"
+        "confidence": "verified",
+        "note": "AWS-0105 występuje 2 razy: Dla SSH i RDP"
       },
       "kics": {
-        "rule_id": "ad0b8b77-0af9-4b2e-8b11-6c8b78e5a3b1",
+        "rule_id": ["a20be318-cac7-457b-911d-04cc6e812c25","3af7f2fd-06e6-4dab-b996-2912bea19ba4"],
         "query_name": "NACL Allows Ingress From 0.0.0.0/0 To SSH Or RDP",
-        "confidence": "requires_verification"
+        "confidence": "verified",
+        "note": "a20b.. Network ACL With Unrestricted Access To RDP i 3af7 Network ACL With Unrestricted Access To SSH pojawiają się w base ale dokłladnie pasują do kontroli"
       },
       "prowler": {
         "check_id": "ec2_networkacl_allow_ingress_any_port",
