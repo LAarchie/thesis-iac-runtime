@@ -5,8 +5,8 @@ resource "aws_s3_bucket" "trail" {
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "compliant"
-    ResearchID = "Monitoring"
+    Scenario   = "vulnerable"
+    ResearchID = "CloudWatch.9"
   }
 }
 
@@ -56,6 +56,12 @@ resource "aws_iam_role" "cloudtrail_cw" {
       Action    = "sts:AssumeRole"
     }]
   })
+
+  tags = {
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "vulnerable"
+    ResearchID = "CloudWatch.9"
+  }
 }
 
 resource "aws_iam_role_policy" "cloudtrail_cw" {
@@ -84,10 +90,22 @@ data "aws_caller_identity" "current" {}
 resource "aws_cloudwatch_log_group" "cis" {
   name              = "/cis/cloudtrail"
   retention_in_days = 90
+
+  tags = {
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "vulnerable"
+    ResearchID = "CloudWatch.9"
+  }
 }
 
 resource "aws_sns_topic" "cis_alerts" {
   name = "cis-alerts"
+
+  tags = {
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "vulnerable"
+    ResearchID = "CloudWatch.9"
+  }
 }
 
 resource "aws_cloudtrail" "main" {
@@ -98,6 +116,12 @@ resource "aws_cloudtrail" "main" {
   enable_log_file_validation    = true
   cloud_watch_logs_group_arn    = "${aws_cloudwatch_log_group.cis.arn}:*"
   cloud_watch_logs_role_arn     = aws_iam_role.cloudtrail_cw.arn
+
+  tags = {
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "vulnerable"
+    ResearchID = "CloudWatch.9"
+  }
 }
 
 # CloudWatch.1 - root usage

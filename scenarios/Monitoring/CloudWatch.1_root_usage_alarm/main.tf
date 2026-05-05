@@ -5,8 +5,8 @@ resource "aws_s3_bucket" "trail" {
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "compliant"
-    ResearchID = "Monitoring"
+    Scenario   = "vulnerable"
+    ResearchID = "CloudWatch.1"
   }
 }
 
@@ -56,6 +56,12 @@ resource "aws_iam_role" "cloudtrail_cw" {
       Action    = "sts:AssumeRole"
     }]
   })
+
+  tags = {
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "vulnerable"
+    ResearchID = "CloudWatch.1"
+  }
 }
 
 resource "aws_iam_role_policy" "cloudtrail_cw" {
@@ -84,10 +90,22 @@ data "aws_caller_identity" "current" {}
 resource "aws_cloudwatch_log_group" "cis" {
   name              = "/cis/cloudtrail"
   retention_in_days = 90
+
+  tags = {
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "vulnerable"
+    ResearchID = "CloudWatch.1"
+  }
 }
 
 resource "aws_sns_topic" "cis_alerts" {
   name = "cis-alerts"
+
+  tags = {
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "vulnerable"
+    ResearchID = "CloudWatch.1"
+  }
 }
 
 resource "aws_cloudtrail" "main" {
@@ -101,7 +119,6 @@ resource "aws_cloudtrail" "main" {
 }
 
 # CloudWatch.4 IAM Policy changes
-
 resource "aws_cloudwatch_log_metric_filter" "cw4_iam" {
   name           = "cis-cw4-iam-changes"
   log_group_name = aws_cloudwatch_log_group.cis.name
@@ -127,7 +144,6 @@ resource "aws_cloudwatch_metric_alarm" "cw4_iam" {
 }
 
 #CloudWatch.5 - CloudTrail Configuration Change
-
 resource "aws_cloudwatch_log_metric_filter" "cw5_cloudtrail_change" {
   name           = "cis-cw5-ct-config-changes"
   log_group_name = aws_cloudwatch_log_group.cis.name
@@ -153,7 +169,6 @@ resource "aws_cloudwatch_metric_alarm" "cw5_cloudtrail_change" {
 }
 
 # CloudWatch.6 - Console Authentication Failures
-
 resource "aws_cloudwatch_log_metric_filter" "cw6_console_auth_failures" {
   name           = "cis-cw6-console-auth-failures"
   log_group_name = aws_cloudwatch_log_group.cis.name
@@ -179,7 +194,6 @@ resource "aws_cloudwatch_metric_alarm" "cw6_console_auth_failures" {
 }
 
 # CloudWatch.7 - Disabling or Scheduled Deletion of Customer Managed Keys
-
 resource "aws_cloudwatch_log_metric_filter" "cw7_cmk_disable_delete" {
   name           = "cis-cw7-cmk-disable-delete"
   log_group_name = aws_cloudwatch_log_group.cis.name
@@ -205,7 +219,6 @@ resource "aws_cloudwatch_metric_alarm" "cw7_cmk_disable_delete" {
 }
 
 # CloudWatch.8 - S3 Bucket Policy Changes
-
 resource "aws_cloudwatch_log_metric_filter" "cw8_s3_policy_changes" {
   name           = "cis-cw8-s3-policy-changes"
   log_group_name = aws_cloudwatch_log_group.cis.name
@@ -231,7 +244,6 @@ resource "aws_cloudwatch_metric_alarm" "cw8_s3_policy_changes" {
 }
 
 # CloudWatch.9 - AWS Config Configuration Changes
-
 resource "aws_cloudwatch_log_metric_filter" "cw9_config_changes" {
   name           = "cis-cw9-config-changes"
   log_group_name = aws_cloudwatch_log_group.cis.name
@@ -257,7 +269,6 @@ resource "aws_cloudwatch_metric_alarm" "cw9_config_changes" {
 }
 
 # CloudWatch.10 - Security Group Changes
-
 resource "aws_cloudwatch_log_metric_filter" "cw10_sg_changes" {
   name           = "cis-cw10-sg-changes"
   log_group_name = aws_cloudwatch_log_group.cis.name
@@ -283,7 +294,6 @@ resource "aws_cloudwatch_metric_alarm" "cw10_sg_changes" {
 }
 
 # CloudWatch.11 - Network Access Control List (NACL) Changes
-
 resource "aws_cloudwatch_log_metric_filter" "cw11_nacl_changes" {
   name           = "cis-cw11-nacl-changes"
   log_group_name = aws_cloudwatch_log_group.cis.name
@@ -309,7 +319,6 @@ resource "aws_cloudwatch_metric_alarm" "cw11_nacl_changes" {
 }
 
 # CloudWatch.12 - Network Gateway Changes
-
 resource "aws_cloudwatch_log_metric_filter" "cw12_gateway_changes" {
   name           = "cis-cw12-gateway-changes"
   log_group_name = aws_cloudwatch_log_group.cis.name
@@ -335,7 +344,6 @@ resource "aws_cloudwatch_metric_alarm" "cw12_gateway_changes" {
 }
 
 # CloudWatch.13 - Route Table Changes
-
 resource "aws_cloudwatch_log_metric_filter" "cw13_route_table_changes" {
   name           = "cis-cw13-route-table-changes"
   log_group_name = aws_cloudwatch_log_group.cis.name
@@ -361,7 +369,6 @@ resource "aws_cloudwatch_metric_alarm" "cw13_route_table_changes" {
 }
 
 # CloudWatch.14 - VPC Changes
-
 resource "aws_cloudwatch_log_metric_filter" "cw14_vpc_changes" {
   name           = "cis-cw14-vpc-changes"
   log_group_name = aws_cloudwatch_log_group.cis.name
