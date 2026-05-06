@@ -1219,9 +1219,8 @@
       "Networking": 4
     },
     "by_iac_testability": {
-      "fully_testable": 27,
-      "partially_testable": 4,
-      "not_testable": 3
+      "fully_testable": 31,
+      "not_testable": 4
     },
     "by_confidence": {
       "verified": 18,
@@ -1229,15 +1228,15 @@
       "requires_verification": 19
     },
     "by_cost_risk": {
-      "none": 20,
-      "low": 9,
+      "none": 14,
+      "low": 15,
       "medium": 4,
       "high": 2
     },
     "requires_verification_count": {
       "Checkov": 0,
-      "Trivy": 16,
-      "KICS": 15,
+      "Trivy": 0,
+      "KICS": 0,
       "Prowler": 0
     }
   },
