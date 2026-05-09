@@ -94,7 +94,7 @@ resource "aws_cloudwatch_log_group" "cis" {
   tags = {
     Standard   = "CIS-AWS-1.4.0"
     Scenario   = "vulnerable"
-    ResearchID = "CloudWatch.5"
+    ResearchID = "CloudWatch.4"
   }
 }
 
@@ -104,7 +104,7 @@ resource "aws_sns_topic" "cis_alerts" {
   tags = {
     Standard   = "CIS-AWS-1.4.0"
     Scenario   = "vulnerable"
-    ResearchID = "CloudWatch.5"
+    ResearchID = "CloudWatch.4"
   }
 }
 
@@ -120,7 +120,7 @@ resource "aws_cloudtrail" "main" {
   tags = {
     Standard   = "CIS-AWS-1.4.0"
     Scenario   = "vulnerable"
-    ResearchID = "CloudWatch.5"
+    ResearchID = "CloudWatch.4"
   }
 }
 
@@ -365,7 +365,7 @@ resource "aws_cloudwatch_metric_alarm" "cw12_gateway_changes" {
 resource "aws_cloudwatch_log_metric_filter" "cw13_route_table_changes" {
   name           = "cis-cw13-route-table-changes"
   log_group_name = aws_cloudwatch_log_group.cis.name
-  pattern        = "{ ($.eventName = CreateRoute) || ($.eventName = CreateRouteTable) || ($.eventName = ReplaceRoute) || ($.eventName = ReplaceRouteTableAssociation) || ($.eventName = DeleteRouteTable) || ($.eventName = DeleteRoute) || ($.eventName = DisassociateRouteTable) }"
+  pattern        = "{($.eventSource=ec2.amazonaws.com) && (($.eventName=CreateRoute) || ($.eventName=CreateRouteTable) || ($.eventName=ReplaceRoute) || ($.eventName=ReplaceRouteTableAssociation) || ($.eventName=DeleteRouteTable) || ($.eventName=DeleteRoute) || ($.eventName=DisassociateRouteTable))}"
 
   metric_transformation {
     name      = "RouteTableChanges"
