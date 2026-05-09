@@ -116,7 +116,15 @@ resource "aws_cloudtrail" "main" {
   enable_log_file_validation    = true
   cloud_watch_logs_group_arn    = "${aws_cloudwatch_log_group.cis.arn}:*"
   cloud_watch_logs_role_arn     = aws_iam_role.cloudtrail_cw.arn
+
+    tags = {
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "vulnerable"
+    ResearchID = "CloudWatch.1"
+  }
 }
+
+ 
 
 # CloudWatch.4 IAM Policy changes
 resource "aws_cloudwatch_log_metric_filter" "cw4_iam" {
