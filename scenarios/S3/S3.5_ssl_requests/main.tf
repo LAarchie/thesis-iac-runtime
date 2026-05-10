@@ -29,13 +29,16 @@ resource "aws_s3_bucket_policy" "cis" {
       Sid       = "DenyHTTP"
       Effect    = "Deny"
       Principal = "*"
-      Action    = "s3:*"
+      Action    = [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ]
       Resource = [
-        aws_s3_bucket.cis.arn,
         "${aws_s3_bucket.cis.arn}/*"
       ]
       Condition = {
-        Bool = { "aws:SecureTransport" = "true" }
+        Bool = { "aws:SecureTransport" = "false" }
       }
     }]
   })
