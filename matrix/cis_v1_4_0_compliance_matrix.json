@@ -676,14 +676,11 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
-      "cost_note": "CloudWatch Alarm $0.10/month. Negligible at test scale.",
       "structural_note": "Shift-left tools detect absence of metric filter/alarm resources — structural weakness of IaC scanning for this entire section.",
       "checkov": {
-        "rule_id": "CKV_AWS_97",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "partial",
-        "note": "CKV_AWS_97 covers all CloudWatch.x controls generically — does not distinguish individual CIS sub-controls"
+        "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
@@ -715,9 +712,9 @@
       "operationally_testable": true,
       "cost_risk": "low",
       "checkov": {
-        "rule_id": "CKV_AWS_97",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "partial"
+        "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
@@ -749,9 +746,9 @@
       "operationally_testable": true,
       "cost_risk": "low",
       "checkov": {
-        "rule_id": "CKV_AWS_97",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "partial"
+        "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
@@ -783,9 +780,9 @@
       "operationally_testable": true,
       "cost_risk": "low",
       "checkov": {
-        "rule_id": "CKV_AWS_97",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "partial"
+        "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
@@ -817,9 +814,9 @@
       "operationally_testable": true,
       "cost_risk": "low",
       "checkov": {
-        "rule_id": "CKV_AWS_97",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "partial"
+        "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
@@ -851,9 +848,9 @@
       "operationally_testable": true,
       "cost_risk": "low",
       "checkov": {
-        "rule_id": "CKV_AWS_97",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "partial"
+        "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
@@ -885,9 +882,9 @@
       "operationally_testable": true,
       "cost_risk": "low",
       "checkov": {
-        "rule_id": "CKV_AWS_97",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "partial"
+        "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
@@ -919,9 +916,9 @@
       "operationally_testable": true,
       "cost_risk": "low",
       "checkov": {
-        "rule_id": "CKV_AWS_97",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "partial"
+        "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
@@ -953,9 +950,9 @@
       "operationally_testable": true,
       "cost_risk": "low",
       "checkov": {
-        "rule_id": "CKV_AWS_97",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "partial"
+        "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
@@ -987,9 +984,9 @@
       "operationally_testable": true,
       "cost_risk": "low",
       "checkov": {
-        "rule_id": "CKV_AWS_97",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "partial"
+        "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
@@ -1020,10 +1017,10 @@
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
-      "checkov": {
-        "rule_id": "CKV_AWS_97",
+     "checkov": {
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "partial"
+        "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
@@ -1055,9 +1052,9 @@
       "operationally_testable": true,
       "cost_risk": "low",
       "checkov": {
-        "rule_id": "CKV_AWS_97",
+        "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "partial"
+        "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
