@@ -122,6 +122,11 @@ resource "aws_cloudtrail" "main" {
     Scenario   = "vulnerable"
     ResearchID = "CloudWatch.1"
   }
+
+  depends_on = [
+    aws_s3_bucket_policy.trail,
+    aws_s3_bucket_public_access_block.trail
+  ]
 }
 
  
