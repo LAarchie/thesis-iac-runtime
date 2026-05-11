@@ -15,14 +15,12 @@ resource "aws_s3_bucket" "cis" {
 resource "aws_s3_bucket_public_access_block" "cis" {
   bucket                  = aws_s3_bucket.cis.id
   block_public_acls       = true
-  block_public_policy     = true
+  block_public_policy     = false
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
 
 # S3.5 — Narzędzia szukają Effect = Deny, SecureTransport = false - w tym przypadku jest przeciwieństwo i wyrzuci błąd dla tej reguły
-
-
 resource "aws_s3_bucket_policy" "cis" {
   bucket = aws_s3_bucket.cis.id
   policy = jsonencode({
@@ -31,9 +29,7 @@ resource "aws_s3_bucket_policy" "cis" {
       Sid       = "NOT-RECOMMENDED-FOR__AWSCONFIG-Rule_s3-bucket-ssl-requests-only"
       Effect    = "Allow"
       Principal = "*"
-      Action    = [
-        "s3:GetObject"
-      ]
+      Action    = "s3:GetObject"
       Resource = [
         "${aws_s3_bucket.cis.arn}/*"
       ]
