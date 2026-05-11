@@ -25,9 +25,8 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "none",
       "checkov": {
-        "rule_id": "CKV_AWS_1",
+        "rule_id": "CKV2_AWS_40",
         "resource": "aws_iam_policy_document",
         "confidence": "verified"
       },
@@ -62,7 +61,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "none",
       "checkov": {
         "rule_id": "CKV_AWS_10",
         "resource": "aws_iam_account_password_policy",
@@ -93,7 +91,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "none",
       "checkov": {
         "rule_id": null,
         "resource": "aws_iam_account_password_policy",
@@ -125,7 +122,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "none",
       "checkov": {
         "rule_id": null,
         "resource": "aws_iam_role_policy_attachment",
@@ -157,7 +153,6 @@
       "iac_testable": false,
       "operationally_testable": true,
       "iac_limitation": "Operational state — key rotation age cannot be determined from Terraform code",
-      "cost_risk": "none",
       "checkov": {
         "rule_id": null,
         "confidence": "not_applicable"
@@ -186,7 +181,6 @@
       "iac_testable": false,
       "operationally_testable": true,
       "iac_limitation": "MFA device association is an operational state — Terraform can create login profiles but cannot enforce MFA enrollment",
-      "cost_risk": "none",
       "checkov": {
         "rule_id": null,
         "resource": "aws_iam_user",
@@ -216,7 +210,6 @@
       "iac_testable": false,
       "operationally_testable": true,
       "iac_limitation": "Operational state — last used date cannot be determined from Terraform code",
-      "cost_risk": "none",
       "checkov": {
         "rule_id": null,
         "confidence": "not_applicable"
@@ -244,7 +237,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "none",
       "checkov": {
         "rule_id": [
           "CKV_AWS_53",
@@ -291,7 +283,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "none",
       "checkov": {
         "rule_id": "CKV_AWS_70",
         "resource": "aws_s3_bucket_policy",
@@ -322,7 +313,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "none",
       "checkov": {
         "rule_id": "CKV2_AWS_6",
         "resource": "aws_s3_bucket_public_access_block",
@@ -364,7 +354,6 @@
       "iac_testable": false,
       "operationally_testable": true,
       "iac_limitation": "MFA Delete requires root account with MFA — cannot be configured via standard Terraform provider",
-      "cost_risk": "none",
       "checkov": {
         "rule_id": null,
         "resource": "aws_s3_bucket_versioning",
@@ -399,8 +388,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "medium",
-      "cost_note": "CloudTrail multi-region begins logging immediately. Stop logging before destroy.",
       "checkov": {
         "rule_id": "CKV_AWS_67",
         "resource": "aws_cloudtrail",
@@ -432,15 +419,13 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "high",
-      "cost_note": "KMS key costs $1.00/month billed per started month. Always destroy promptly.",
       "checkov": {
         "rule_id": "CKV_AWS_35",
         "resource": "aws_cloudtrail",
         "confidence": "verified"
       },
       "trivy": {
-        "rule_id": "AVD-AWS-0016",
+        "rule_id": "AVD-AWS-0015",
         "resource": "aws_cloudtrail",
         "confidence": "verified"
       },
@@ -464,8 +449,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "medium",
-      "cost_note": "Depends on CloudTrail being active. Stop logging before destroy.",
       "checkov": {
         "rule_id": "CKV_AWS_36",
         "resource": "aws_cloudtrail",
@@ -498,8 +481,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "medium",
-      "cost_note": "CloudWatch Logs ingestion $0.50/GB. Minimal at test scale.",
       "checkov": {
         "rule_id": "CKV2_AWS_10",
         "resource": "aws_cloudtrail",
@@ -530,8 +511,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
-      "cost_note": "S3 bucket only — negligible cost.",
       "checkov": {
         "rule_id": [
           "CKV_AWS_53",
@@ -581,8 +560,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
-      "cost_note": "Access logs generate additional S3 objects. Use force_destroy=true on test buckets.",
       "checkov": {
         "rule_id": "CKV_AWS_18",
         "resource": "aws_s3_bucket",
@@ -620,8 +597,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "medium",
-      "cost_note": "$0.003 per configuration item recorded. Stop recorder before destroy.",
       "checkov": {
         "rule_id": "CKV2_AWS_48",
         "resource": "aws_config_configuration_recorder",
@@ -654,8 +629,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "high",
-      "cost_note": "$1.00/month per KMS key billed per started month. Always destroy promptly.",
       "checkov": {
         "rule_id": "CKV_AWS_7",
         "resource": "aws_kms_key",
@@ -722,7 +695,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
@@ -756,7 +728,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
@@ -790,7 +761,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
@@ -824,7 +794,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
@@ -858,7 +827,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
@@ -892,7 +860,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
@@ -926,7 +893,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
@@ -960,7 +926,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
@@ -994,7 +959,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
@@ -1028,7 +992,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
@@ -1062,7 +1025,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
@@ -1094,7 +1056,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "none",
       "checkov": {
         "rule_id": "CKV2_AWS_12",
         "resource": "aws_default_security_group",
@@ -1137,8 +1098,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "low",
-      "cost_note": "VPC Flow Logs $0.50/GB. Minimal for empty test VPC with no traffic.",
       "checkov": {
         "rule_id": "CKV2_AWS_11",
         "resource": "aws_vpc",
@@ -1170,7 +1129,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "none",
       "checkov": {
         "rule_id": "CKV_AWS_106",
         "resource": "aws_ebs_encryption_by_default",
@@ -1201,7 +1159,6 @@
       ],
       "iac_testable": true,
       "operationally_testable": true,
-      "cost_risk": "none",
       "checkov": {
         "rule_id": [
           "CKV_AWS_231",
@@ -1249,12 +1206,6 @@
       "verified": 18,
       "partial": 14,
       "requires_verification": 19
-    },
-    "by_cost_risk": {
-      "none": 14,
-      "low": 15,
-      "medium": 4,
-      "high": 2
     },
     "requires_verification_count": {
       "Checkov": 0,
