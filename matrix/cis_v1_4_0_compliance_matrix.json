@@ -43,7 +43,7 @@
       },
       "prowler": {
         "check_id": "iam_policy_no_full_access_wildcard_attached",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -167,7 +167,7 @@
       },
       "prowler": {
         "check_id": "iam_rotate_access_key_90_days",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -226,7 +226,7 @@
       },
       "prowler": {
         "check_id": "iam_user_credentials_unused_45_days_console_access",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -293,9 +293,9 @@
         "confidence": "verified"
       },
       "trivy": {
-        "rule_id": "AVD-AWS-0088",
+        "rule_id": null,
         "resource": "aws_s3_bucket_policy",
-        "confidence": "verified"
+        "confidence": "not applicable"
       },
       "kics": {
         "rule_id": "4bc4dd4c-7d8d-405e-a0fb-57fa4c31b4d9",
@@ -344,7 +344,7 @@
       },
       "prowler": {
         "check_id": "s3_bucket_public_access_block_bucket_settings",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -379,7 +379,7 @@
       },
       "prowler": {
         "check_id": "s3_bucket_mfa_delete_enabled",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -558,7 +558,7 @@
       },
       "prowler": {
         "check_id": "cloudtrail_s3_bucket_is_not_publicly_accessible",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -594,7 +594,7 @@
       },
       "prowler": {
         "check_id": "cloudtrail_s3_bucket_access_logging_enabled",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -695,7 +695,7 @@
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_root_usage",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -729,7 +729,7 @@
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_iam_policy_changes",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -763,7 +763,7 @@
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_cloudtrail_configuration_changes",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -797,7 +797,7 @@
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_management_console_auth_failures",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -831,7 +831,7 @@
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_disabling_or_scheduled_deletion_of_kms_cmk",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -865,7 +865,7 @@
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_s3_bucket_policy_changes",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -899,7 +899,7 @@
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_aws_config_configuration_changes",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -967,7 +967,7 @@
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_nacl_changes",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -1001,7 +1001,7 @@
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_network_gateway_changes",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -1035,7 +1035,7 @@
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_route_table_changes",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -1069,7 +1069,7 @@
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_vpc_changes",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -1105,7 +1105,7 @@
       },
       "prowler": {
         "check_id": "ec2_securitygroup_default_restrict_traffic",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -1139,7 +1139,7 @@
       },
       "prowler": {
         "check_id": "ec2_vpc_flow_logs_enabled",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -1168,7 +1168,7 @@
       },
       "prowler": {
         "check_id": "ec2_ebs_default_encryption_enabled",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     },
     {
@@ -1202,7 +1202,7 @@
       },
       "prowler": {
         "check_id": "ec2_networkacl_allow_ingress_any_port",
-        "confidence": "verified"
+        "confidence": "To be verified"
       }
     }
   ],
