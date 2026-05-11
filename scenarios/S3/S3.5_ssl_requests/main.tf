@@ -20,25 +20,25 @@ resource "aws_s3_bucket_public_access_block" "cis" {
   restrict_public_buckets = true
 }
 
-# S3.5 — Polityka zezwala na HTTP (SecureTransport = "true" blokuje tylko HTTPS)
+# S3.5 — Narzędzia szukają Effect = Deny, SecureTransport = false - w tym przypadku jest przeciwieństwo i wyrzuci błąd dla tej reguły
+
+
 resource "aws_s3_bucket_policy" "cis" {
   bucket = aws_s3_bucket.cis.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Sid       = "DenyHTTP"
-      Effect    = "Deny"
+      Sid       = "NOT-RECOMMENDED-FOR__AWSCONFIG-Rule_s3-bucket-ssl-requests-only"
+      Effect    = "Allow"
       Principal = "*"
       Action    = [
-        "s3:GetObject",
-        "s3:PutObject",
-        "s3:DeleteObject"
+        "s3:GetObject"
       ]
       Resource = [
         "${aws_s3_bucket.cis.arn}/*"
       ]
       Condition = {
-        Bool = { "aws:SecureTransport" = "false" }
+        Bool = { "aws:SecureTransport" = "true" }
       }
     }]
   })
