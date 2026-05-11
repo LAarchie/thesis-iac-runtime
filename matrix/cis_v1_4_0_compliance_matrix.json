@@ -37,13 +37,19 @@
         "confidence": "not applicable"
       },
       "kics": {
-        "rule_id": ["575a2155-6af1-4026-b1af-d5bc8fe2a904", "2f37c4a3-58b9-4afe-8a87-d7f1d2286f84"],
-        "query_name": ["IAM Policy Grants Full Permissions", "IAM Policies With Full Privileges"],
+        "rule_id": [
+          "575a2155-6af1-4026-b1af-d5bc8fe2a904",
+          "2f37c4a3-58b9-4afe-8a87-d7f1d2286f84"
+        ],
+        "query_name": [
+          "IAM Policy Grants Full Permissions",
+          "IAM Policies With Full Privileges"
+        ],
         "confidence": "verified"
       },
       "prowler": {
-        "check_id": "iam_policy_no_full_access_wildcard_attached",
-        "confidence": "To be verified"
+        "check_id": "iam_customer_attached_policy_no_administrative_privileges",
+        "confidence": "verified"
       }
     },
     {
@@ -139,7 +145,6 @@
         "check_id": "iam_support_role_created",
         "confidence": "verified"
       }
-      
     },
     {
       "cis_id": "IAM.3",
@@ -343,8 +348,9 @@
         "note": "KICS nie wykrywa braku zasobu aws_s3_bucket_public_access_block — reguły sprawdzają wyłącznie wartości atrybutów istniejącego zasobu. Brak zasobu oznacza brak atrybutów do sprawdzenia."
       },
       "prowler": {
-        "check_id": "s3_bucket_public_access_block_bucket_settings",
-        "confidence": "To be verified"
+        "check_id": "s3_bucket_level_public_access_block",
+        "confidence": "partial",
+        "note": "Prowler 5.19.0 zwraca PASS dla bucketu bez aws_s3_bucket_public_access_block — potwierdzone false negative. Check nie wykrywa braku zasobu."
       }
     },
     {
@@ -378,8 +384,9 @@
         "note": "Reguła c5b31ab9 (S3 Bucket Without Enabled MFA Delete) pojawia się w baseline i wszystkich scenariuszach S3 — jest stałym szumem, nie specyficznym wykryciem S3.20. MFA Delete nie można skonfigurować przez standardowy AWS Terraform provider, dlatego KICS flaguje każdy bucket bez MFA Delete niezależnie od scenariusza."
       },
       "prowler": {
-        "check_id": "s3_bucket_mfa_delete_enabled",
-        "confidence": "To be verified"
+        "check_id": "s3_bucket_no_mfa_delete",
+        "confidence": "verified",
+        "note": "Kazdy bucket S3 otrzymuje FAIL dla tej kontroli przez brak mozliwosci skonfigurowania tego przez Terraform"
       }
     },
     {
@@ -400,7 +407,7 @@
         "confidence": "verified"
       },
       "trivy": {
-        "rule_id": "AWS-0014",   
+        "rule_id": "AWS-0014",
         "resource": "aws_cloudtrail",
         "confidence": "verified"
       },
@@ -537,28 +544,31 @@
         "confidence": "verified"
       },
       "trivy": {
-        "rule_id": 
-        ["AWS-0086",
-        "AWS-0087",
-        "AWS-0091",
-        "AWS-0093"],
+        "rule_id": [
+          "AWS-0086",
+          "AWS-0087",
+          "AWS-0091",
+          "AWS-0093"
+        ],
         "resource": "aws_s3_bucket_public_access_block",
         "confidence": "verified"
       },
       "kics": {
-        "rule_id": 
-        ["1a4bc881-9f69-4d44-8c9a-d37d08f54c50",
-        "d0cc8694-fcad-43ff-ac86-32331d7e867f",
-        "4fa66806-0dd9-4f8d-9480-3174d39c7c91"],
-        "query_name": 
-        ["S3 Bucket Allows Public Policy",
-        "S3 Bucket Allows Public ACL",
-        "S3 Bucket Without Ignore Public ACL"],
+        "rule_id": [
+          "1a4bc881-9f69-4d44-8c9a-d37d08f54c50",
+          "d0cc8694-fcad-43ff-ac86-32331d7e867f",
+          "4fa66806-0dd9-4f8d-9480-3174d39c7c91"
+        ],
+        "query_name": [
+          "S3 Bucket Allows Public Policy",
+          "S3 Bucket Allows Public ACL",
+          "S3 Bucket Without Ignore Public ACL"
+        ],
         "confidence": "verified"
       },
       "prowler": {
-        "check_id": "cloudtrail_s3_bucket_is_not_publicly_accessible",
-        "confidence": "To be verified"
+        "check_id": "s3_bucket_level_public_access_block",
+        "confidence": "verified"
       }
     },
     {
@@ -584,17 +594,19 @@
         "confidence": "verified"
       },
       "kics": {
-        "rule_id": 
-        ["ee9e50e8-b2ed-4176-ad42-8fc0cf7593f4",
-        "f861041c-8c9f-4156-acfc-5e6e524f5884"],
-        "query_name": 
-        ["CloudTrail Log Files S3 Bucket with Logging Disabled",
-        "S3 Bucket Logging Disabled"],
+        "rule_id": [
+          "ee9e50e8-b2ed-4176-ad42-8fc0cf7593f4",
+          "f861041c-8c9f-4156-acfc-5e6e524f5884"
+        ],
+        "query_name": [
+          "CloudTrail Log Files S3 Bucket with Logging Disabled",
+          "S3 Bucket Logging Disabled"
+        ],
         "confidence": "verified"
       },
       "prowler": {
-        "check_id": "cloudtrail_s3_bucket_access_logging_enabled",
-        "confidence": "To be verified"
+        "check_id": "cloudtrail_logs_s3_bucket_access_logging_enabled",
+        "confidence": "verified"
       }
     },
     {
@@ -728,8 +740,8 @@
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
-        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_iam_policy_changes",
-        "confidence": "To be verified"
+        "check_id": "cloudwatch_log_metric_filter_policy_changes",
+        "confidence": "verified"
       }
     },
     {
@@ -762,8 +774,8 @@
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
-        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_cloudtrail_configuration_changes",
-        "confidence": "To be verified"
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_cloudtrail_configuration_changes_enabled",
+        "confidence": "verified"
       }
     },
     {
@@ -796,8 +808,8 @@
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
-        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_management_console_auth_failures",
-        "confidence": "To be verified"
+        "check_id": "cloudwatch_log_metric_filter_authentication_failures",
+        "confidence": "verified"
       }
     },
     {
@@ -830,8 +842,8 @@
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
-        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_disabling_or_scheduled_deletion_of_kms_cmk",
-        "confidence": "To be verified"
+        "check_id": "cloudwatch_log_metric_filter_disable_or_scheduled_deletion_of_kms_cmk",
+        "confidence": "verified"
       }
     },
     {
@@ -864,8 +876,8 @@
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
-        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_s3_bucket_policy_changes",
-        "confidence": "To be verified"
+        "check_id": "cloudwatch_log_metric_filter_for_s3_bucket_policy_changes",
+        "confidence": "verified"
       }
     },
     {
@@ -898,8 +910,8 @@
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
-        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_aws_config_configuration_changes",
-        "confidence": "To be verified"
+        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_aws_config_configuration_changes_enable",
+        "confidence": "verified"
       }
     },
     {
@@ -932,7 +944,7 @@
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
-        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_security_group_changes",
+        "check_id": "cloudwatch_log_metric_filter_security_group_changes",
         "confidence": "verified"
       }
     },
@@ -966,8 +978,8 @@
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
-        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_nacl_changes",
-        "confidence": "To be verified"
+        "check_id": "cloudwatch_changes_to_network_acls_alarm_configured",
+        "confidence": "verified"
       }
     },
     {
@@ -1000,8 +1012,8 @@
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
-        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_network_gateway_changes",
-        "confidence": "To be verified"
+        "check_id": "cloudwatch_changes_to_network_gateways_alarm_configured",
+        "confidence": "verified"
       }
     },
     {
@@ -1017,7 +1029,7 @@
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "low",
-     "checkov": {
+      "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable"
@@ -1034,8 +1046,8 @@
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
-        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_route_table_changes",
-        "confidence": "To be verified"
+        "check_id": "cloudwatch_changes_to_network_route_tables_alarm_configured",
+        "confidence": "verified"
       }
     },
     {
@@ -1068,8 +1080,8 @@
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
-        "check_id": "cloudwatch_log_metric_filter_and_alarm_for_vpc_changes",
-        "confidence": "To be verified"
+        "check_id": "cloudwatch_changes_to_vpcs_alarm_configured",
+        "confidence": "verified"
       }
     },
     {
@@ -1090,16 +1102,22 @@
         "note": "CKV2_AWS_11 | Ensure VPC flow logging is enabled in all VPCs - też jest wywoływane w scenariuszu EC2.2"
       },
       "trivy": {
-        "rule_id": ["AWS-0104", "AWS-0107"],
+        "rule_id": [
+          "AWS-0104",
+          "AWS-0107"
+        ],
         "resource": "aws_default_security_group",
         "confidence": "verified",
         "note": "AWS-0124 | Missing description for security group rule, AWS-0178 | VPC Flow Logs — VPC Flow Logs should be enabled for packet 'Rejects' również wywoływane dla scenariusza EC2.2"
       },
       "kics": {
-        "rule_id": 
-        ["46883ce1-dc3e-4b17-9195-c6a601624c73",
-        "9a4ef195-74b9-4c58-b8ed-2b2fe4353a75"],
-        "query_name": ["VPC Default Security Group With Traffic"],
+        "rule_id": [
+          "46883ce1-dc3e-4b17-9195-c6a601624c73",
+          "9a4ef195-74b9-4c58-b8ed-2b2fe4353a75"
+        ],
+        "query_name": [
+          "VPC Default Security Group With Traffic"
+        ],
         "confidence": "verified",
         "note": "f83121ea-03da-434f-9277-9cd247ab3047 VPC FlowLogs Disabled też dla EC2.2 (raczej EC2.6)"
       },
@@ -1147,7 +1165,9 @@
       "section": "Networking",
       "level": 2,
       "description": "EBS default encryption should be enabled",
-      "terraform_resource": ["aws_ebs_encryption_by_default"],
+      "terraform_resource": [
+        "aws_ebs_encryption_by_default"
+      ],
       "iac_testable": true,
       "operationally_testable": true,
       "cost_risk": "none",
@@ -1183,7 +1203,10 @@
       "operationally_testable": true,
       "cost_risk": "none",
       "checkov": {
-        "rule_id": ["CKV_AWS_231", "CKV_AWS_232"],
+        "rule_id": [
+          "CKV_AWS_231",
+          "CKV_AWS_232"
+        ],
         "resource": "aws_network_acl_rule",
         "confidence": "verified",
         "note": "Również wyzwala rule id jak dla EC2.2 i EC2.6 (CKV2_AWS_(11/12)"
@@ -1195,7 +1218,10 @@
         "note": "AWS-0105 występuje 2 razy: Dla SSH i RDP"
       },
       "kics": {
-        "rule_id": ["a20be318-cac7-457b-911d-04cc6e812c25","3af7f2fd-06e6-4dab-b996-2912bea19ba4"],
+        "rule_id": [
+          "a20be318-cac7-457b-911d-04cc6e812c25",
+          "3af7f2fd-06e6-4dab-b996-2912bea19ba4"
+        ],
         "query_name": "NACL Allows Ingress From 0.0.0.0/0 To SSH Or RDP",
         "confidence": "verified",
         "note": "a20b.. Network ACL With Unrestricted Access To RDP i 3af7 Network ACL With Unrestricted Access To SSH pojawiają się w base ale dokłladnie pasują do kontroli"
