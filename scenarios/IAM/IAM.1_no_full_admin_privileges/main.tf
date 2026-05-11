@@ -62,3 +62,8 @@ resource "aws_iam_user" "cis_test" {
     ResearchID = "IAM.1"
   }
 }
+
+resource "aws_iam_user_policy_attachment" "cis_test" {
+  user       = aws_iam_user.cis_test.name
+  policy_arn = aws_iam_policy.cis_test.arn
+}
