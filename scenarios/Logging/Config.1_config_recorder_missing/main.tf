@@ -13,6 +13,31 @@ resource "aws_kms_key" "cloudtrail" {
   }
 }
 
+resource "aws_kms_key_policy" "cloudtrail" {
+  key_id = aws_kms_key.cloudtrail.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid    = "Enable IAM User Permissions"
+        Effect = "Allow"
+        Principal = {
+          AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+        }
+        Action   = "kms:*"
+        Resource = "*"
+      },
+      {
+        Sid    = "Allow CloudTrail to encrypt logs"
+        Effect = "Allow"
+        Principal = { Service = "cloudtrail.amazonaws.com" }
+        Action   = ["kms:GenerateDataKey*", "kms:DescribeKey"]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
 # CloudTrail.6 — S3 bucket access logging enabled
 # CloudTrail.7 — S3 bucket not public
 resource "aws_s3_bucket" "trail" {
@@ -124,7 +149,10 @@ resource "aws_cloudtrail" "main" {
   cloud_watch_logs_group_arn    = "${aws_cloudwatch_log_group.cloudtrail.arn}:*"
   cloud_watch_logs_role_arn     = aws_iam_role.cloudtrail_cw.arn
 
-  depends_on = [aws_s3_bucket_policy.trail]
+  depends_on = [
+    aws_s3_bucket_policy.trail,
+    aws_kms_key_policy.cloudtrail
+  ]
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
