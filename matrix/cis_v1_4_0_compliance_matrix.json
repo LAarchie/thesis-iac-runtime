@@ -28,12 +28,15 @@
       "checkov": {
         "rule_id": "CKV2_AWS_40",
         "resource": "aws_iam_policy_document",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_iam_policy",
-        "confidence": "not applicable"
+        "confidence": "not applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "kics": {
         "rule_id": [
@@ -44,11 +47,13 @@
           "IAM Policy Grants Full Permissions",
           "IAM Policies With Full Privileges"
         ],
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       },
       "prowler": {
         "check_id": "iam_customer_attached_policy_no_administrative_privileges",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       }
     },
     {
@@ -64,21 +69,25 @@
       "checkov": {
         "rule_id": "CKV_AWS_10",
         "resource": "aws_iam_account_password_policy",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       },
       "trivy": {
         "rule_id": "AWS-0063",
         "resource": "aws_iam_account_password_policy",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       },
       "kics": {
         "rule_id": "1bc1c685-e593-450e-88fb-19db4c82aa1d",
         "query_name": "IAM Password Without Minimum Length",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       },
       "prowler": {
         "check_id": "iam_password_policy_minimum_length_14",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       }
     },
     {
@@ -94,21 +103,26 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_iam_account_password_policy",
-        "confidence": "not applicable"
+        "confidence": "not applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": "AWS-0056",
         "resource": "aws_iam_account_password_policy",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       },
       "kics": {
         "rule_id": "89806cdc-9c2e-4bd1-a0dc-53f339bcfb2a",
         "query_name": "Password Without Reuse Prevention",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       },
       "prowler": {
         "check_id": "iam_password_policy_reuse_24",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       }
     },
     {
@@ -125,21 +139,28 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_iam_role_policy_attachment",
-        "confidence": "not applicable"
+        "confidence": "not applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_iam_role_policy_attachment",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "kics": {
         "rule_id": null,
         "query_name": "Support Role Not Created",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "prowler": {
         "check_id": "iam_support_role_created",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       }
     },
     {
@@ -155,19 +176,27 @@
       "iac_limitation": "Operational state — key rotation age cannot be determined from Terraform code",
       "checkov": {
         "rule_id": null,
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result": "FN",
+        "scan_result_reason": "iac_not_testable"
       },
       "trivy": {
         "rule_id": null,
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result": "FN",
+        "scan_result_reason": "iac_not_testable"
       },
       "kics": {
         "rule_id": null,
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result": "FN",
+        "scan_result_reason": "iac_not_testable"
       },
       "prowler": {
         "check_id": "iam_rotate_access_key_90_days",
-        "confidence": "To be verified"
+        "confidence": "verified",
+        "scan_result": "FN",
+        "scan_result_reason": "Narzedzie zwrocilo PASS ze wzgledu na nower uwierzytelnienie - brak starych kluczy"
       }
     },
     {
@@ -184,21 +213,28 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_iam_user",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result": "FN",
+        "scan_result_reason": "iac_not_testable"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_iam_user",
-        "confidence": "not applicable"
+        "confidence": "not applicable",
+        "scan_result": "FN",
+        "scan_result_reason": "iac_not_testable"
       },
       "kics": {
         "rule_id": null,
         "query_name": "MFA Not Enabled For IAM User",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result": "FN",
+        "scan_result_reason": "iac_not_testable"
       },
       "prowler": {
         "check_id": "iam_user_mfa_enabled_console_access",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       }
     },
     {
@@ -212,19 +248,31 @@
       "iac_limitation": "Operational state — last used date cannot be determined from Terraform code",
       "checkov": {
         "rule_id": null,
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result": "FN",
+        "scan_result_reason": "iac_not_testable"
       },
       "trivy": {
         "rule_id": null,
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result": "FN",
+        "scan_result_reason": "iac_not_testable"
       },
       "kics": {
         "rule_id": null,
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result": "FN",
+        "scan_result_reason": "iac_not_testable"
       },
       "prowler": {
-        "check_id": "iam_user_credentials_unused_45_days_console_access",
-        "confidence": "To be verified"
+        "check_id": [
+        "iam_user_accesskey_unused",
+        "iam_user_console_access_unused"
+      ],
+        "confidence": "verified",
+        "scan_result": "FN",
+        "scan_result_reason": "recent login - wrong PASS control",
+        "note": "obaa checki zwracaja PASS przez login wykonany niedawno. Zasadnicze ograniczenie skanu"
       }
     },
     {
@@ -247,6 +295,7 @@
         ],
         "resource": "aws_s3_bucket_public_access_block",
         "confidence": "verified",
+        "scan_result": "TP",
         "note": "CKV2_AWS_6 pojawia się również przy błędnej konfiguracji aws_s3_bucket_public_access_block (wszystkie flagi ustawione na false), jednak semantycznie należy do S3.8 — sprawdza obecność zasobu, nie jego konfigurację. Dodano do S3.1 dla kompletności pipeline analitycznego."
       },
       "trivy": {
@@ -257,7 +306,8 @@
           "AVD-AWS-0093"
         ],
         "resource": "aws_s3_bucket_public_access_block",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       },
       "kics": {
         "rule_id": [
@@ -266,11 +316,13 @@
           "4fa66806-0dd9-4f8d-9480-3174d39c7c91"
         ],
         "query_name": "S3 Bucket Block Public Access Disabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       },
       "prowler": {
         "check_id": "s3_bucket_level_public_access_block",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       }
     },
     {
@@ -286,21 +338,26 @@
       "checkov": {
         "rule_id": "CKV_AWS_70",
         "resource": "aws_s3_bucket_policy",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_s3_bucket_policy",
-        "confidence": "not applicable"
+        "confidence": "not applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "kics": {
         "rule_id": "4bc4dd4c-7d8d-405e-a0fb-57fa4c31b4d9",
         "query_name": "S3 Bucket Policy Accepts HTTP Requests",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       },
       "prowler": {
         "check_id": "s3_bucket_secure_transport_policy",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result": "TP"
       }
     },
     {
@@ -317,6 +374,7 @@
         "rule_id": "CKV2_AWS_6",
         "resource": "aws_s3_bucket_public_access_block",
         "confidence": "verified",
+        "scan_result": "TP",
         "note": "CKV2_AWS_6 wyzwala się przez brak bloku aws_s3_bucket_public_access_block. Reguły granularne (CKV_AWS_53-56) sprawdzające poszczególne parametry bloku nie pojawiają się — brak zasobu oznacza brak atrybutów do sprawdzenia."
       },
       "trivy": {
@@ -329,17 +387,22 @@
         ],
         "resource": "aws_s3_bucket_public_access_block",
         "confidence": "verified",
+        "scan_result": "TP",
         "note": "AVD-AWS-0094 jest unikalne dla S3.8 (brak zasobu aws_s3_bucket_public_access_block) i nie pojawia się w S3.1 gdzie zasób istnieje ale z błędną konfiguracją. Pozostałe ID pokrywają się z S3.1."
       },
       "kics": {
         "rule_id": null,
         "query_name": "S3 Bucket Block Public Access Disabled",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
+
         "note": "KICS nie wykrywa braku zasobu aws_s3_bucket_public_access_block — reguły sprawdzają wyłącznie wartości atrybutów istniejącego zasobu. Brak zasobu oznacza brak atrybutów do sprawdzenia."
       },
       "prowler": {
         "check_id": "s3_bucket_level_public_access_block",
         "confidence": "partial",
+        "scan_result":"FN",
         "note": "Prowler 5.19.0 zwraca PASS dla bucketu bez aws_s3_bucket_public_access_block — potwierdzone false negative. Check nie wykrywa braku zasobu."
       }
     },
@@ -358,23 +421,30 @@
         "rule_id": null,
         "resource": "aws_s3_bucket_versioning",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"",
         "note": "MFA Delete wymaga uwierzytelnienia root account z fizycznym tokenem MFA — nie można skonfigurować przez standardowy AWS Terraform provider. Żadne narzędzie IaC scanning nie posiada funkcjonalnej reguły weryfikującej MFA Delete w sposób umożliwiający odróżnienie scenariusza zgodnego od podatnego."
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_s3_bucket_versioning",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"",
         "note": "MFA Delete wymaga uwierzytelnienia root account z fizycznym tokenem MFA — nie można skonfigurować przez standardowy AWS Terraform provider. Żadne narzędzie IaC scanning nie posiada funkcjonalnej reguły weryfikującej MFA Delete w sposób umożliwiający odróżnienie scenariusza zgodnego od podatnego."
       },
       "kics": {
         "rule_id": null,
         "query_name": "S3 MFA Delete Disabled",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"",
         "note": "Reguła c5b31ab9 (S3 Bucket Without Enabled MFA Delete) pojawia się w baseline i wszystkich scenariuszach S3 — jest stałym szumem, nie specyficznym wykryciem S3.20. MFA Delete nie można skonfigurować przez standardowy AWS Terraform provider, dlatego KICS flaguje każdy bucket bez MFA Delete niezależnie od scenariusza."
       },
       "prowler": {
         "check_id": "s3_bucket_no_mfa_delete",
         "confidence": "verified",
+        "scan_result":"FP?", 
         "note": "Kazdy bucket S3 otrzymuje FAIL dla tej kontroli przez brak mozliwosci skonfigurowania tego przez Terraform"
       }
     },
@@ -391,21 +461,25 @@
       "checkov": {
         "rule_id": "CKV_AWS_67",
         "resource": "aws_cloudtrail",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "trivy": {
         "rule_id": "AWS-0014",
         "resource": "aws_cloudtrail",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "kics": {
         "rule_id": "8173d5eb-96b5-4aa6-a71b-ecfa153c123d",
         "query_name": "CloudTrail Multi Region Disabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "prowler": {
         "check_id": "cloudtrail_multi_region_enabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -422,21 +496,25 @@
       "checkov": {
         "rule_id": "CKV_AWS_35",
         "resource": "aws_cloudtrail",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "trivy": {
         "rule_id": "AVD-AWS-0015",
         "resource": "aws_cloudtrail",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "kics": {
         "rule_id": "5d9e3164-9265-470c-9a10-57ae454ac0c7",
         "query_name": "CloudTrail Not Encrypted",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "prowler": {
         "check_id": "cloudtrail_kms_encryption_enabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -452,21 +530,25 @@
       "checkov": {
         "rule_id": "CKV_AWS_36",
         "resource": "aws_cloudtrail",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "trivy": {
         "rule_id": "AWS-0016",
         "resource": "aws_cloudtrail",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "kics": {
         "rule_id": "52ffcfa6-6c70-4ea6-8376-d828d3961669",
         "query_name": "CloudTrail Log File Validation Disabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "prowler": {
         "check_id": "cloudtrail_log_file_validation_enabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -484,21 +566,25 @@
       "checkov": {
         "rule_id": "CKV2_AWS_10",
         "resource": "aws_cloudtrail",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "trivy": {
         "rule_id": "AWS-0162",
         "resource": "aws_cloudtrail",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "kics": {
         "rule_id": "17b30f8f-8dfb-4597-adf6-57600b6cf25e",
         "query_name": "CloudTrail Multi Region Disabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "prowler": {
         "check_id": "cloudtrail_cloudwatch_logging_enabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -520,7 +606,8 @@
           "CKV2_AWS_6"
         ],
         "resource": "aws_s3_bucket_public_access_block",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "trivy": {
         "rule_id": [
@@ -530,7 +617,8 @@
           "AWS-0093"
         ],
         "resource": "aws_s3_bucket_public_access_block",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "kics": {
         "rule_id": [
@@ -543,11 +631,13 @@
           "S3 Bucket Allows Public ACL",
           "S3 Bucket Without Ignore Public ACL"
         ],
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "prowler": {
         "check_id": "s3_bucket_level_public_access_block",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -563,12 +653,14 @@
       "checkov": {
         "rule_id": "CKV_AWS_18",
         "resource": "aws_s3_bucket",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "trivy": {
         "rule_id": "AWS-0089",
         "resource": "aws_s3_bucket_logging",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "kics": {
         "rule_id": [
@@ -579,11 +671,13 @@
           "CloudTrail Log Files S3 Bucket with Logging Disabled",
           "S3 Bucket Logging Disabled"
         ],
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "prowler": {
         "check_id": "cloudtrail_logs_s3_bucket_access_logging_enabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -601,17 +695,22 @@
         "rule_id": "CKV2_AWS_48",
         "resource": "aws_config_configuration_recorder",
         "confidence": "verified",
+        "scan_result":"TP",
         "note": "CKV2_AWS_48 wykrywa all_supported=false ale nie wykrywa całkowitego braku aws_config_configuration_recorder."
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_config_configuration_recorder",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy nie posiada reguły dla AWS Config recorder. Brak wykrycia potwierdzony testami scenariusza Config.1_config_recorder_disabled."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS nie posiada zapytania dla AWS Config recorder. Brak wykrycia potwierdzony testami scenariusza Config.1_config_recorder_disabled."
       },
       "prowler": {
@@ -632,21 +731,25 @@
       "checkov": {
         "rule_id": "CKV_AWS_7",
         "resource": "aws_kms_key",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "trivy": {
         "rule_id": "AWS-0065",
         "resource": "aws_kms_key",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "kics": {
         "rule_id": "22fbfeac-7b5a-421a-8a27-7a2178bb910b",
         "query_name": "CMK Rotation Disabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "prowler": {
         "check_id": "kms_cmk_rotation_enabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -665,22 +768,29 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "confidence": "not_applicable"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_root_usage",
-        "confidence": "To be verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -698,22 +808,29 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_policy_changes",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -731,22 +848,29 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_cloudtrail_configuration_changes_enabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -764,22 +888,29 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_authentication_failures",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -797,22 +928,29 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_disable_or_scheduled_deletion_of_kms_cmk",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -830,22 +968,29 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_for_s3_bucket_policy_changes",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -863,22 +1008,29 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_and_alarm_for_aws_config_configuration_changes_enable",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -896,22 +1048,29 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_log_metric_filter_security_group_changes",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -929,22 +1088,29 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_changes_to_network_acls_alarm_configured",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -962,22 +1128,29 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_changes_to_network_gateways_alarm_configured",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -995,22 +1168,29 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_changes_to_network_route_tables_alarm_configured",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -1028,22 +1208,29 @@
       "checkov": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
-        "confidence": "not_applicable"
+        "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_cloudwatch_log_metric_filter",
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "Trivy v0.69.3 nie posiada reguł wykrywających brak metryk alarmów CloudWatch CIS v1.4.0. Wyniki skanów scenariuszy podatnych są identyczne z wynikami _base (AWS-0015, AWS-0017, AWS-0089, AWS-0090, AWS-0095, AWS-0132)."
       },
       "kics": {
         "rule_id": null,
         "confidence": "not_applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool",
         "note": "KICS v2.1.20 nie posiada funkcjonalnych reguł dla żadnej kontroli CloudWatch CIS v1.4.0. Jedyna powiązana reguła (27c6a499) nie wykrywa faktycznego naruszenia — generuje false positives na wszystkich filtrach metrycznych których pattern nie zawiera eventSource s3.amazonaws.com."
       },
       "prowler": {
         "check_id": "cloudwatch_changes_to_vpcs_alarm_configured",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -1069,6 +1256,7 @@
         ],
         "resource": "aws_default_security_group",
         "confidence": "verified",
+        "scan_result":"TP",
         "note": "AWS-0124 | Missing description for security group rule, AWS-0178 | VPC Flow Logs — VPC Flow Logs should be enabled for packet 'Rejects' również wywoływane dla scenariusza EC2.2"
       },
       "kics": {
@@ -1080,11 +1268,13 @@
           "VPC Default Security Group With Traffic"
         ],
         "confidence": "verified",
+        "scan_result":"TP",
         "note": "f83121ea-03da-434f-9277-9cd247ab3047 VPC FlowLogs Disabled też dla EC2.2 (raczej EC2.6)"
       },
       "prowler": {
         "check_id": "ec2_securitygroup_default_restrict_traffic",
-        "confidence": "To be verified"
+        "confidence": "To be verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -1102,20 +1292,23 @@
         "rule_id": "CKV2_AWS_11",
         "resource": "aws_vpc",
         "confidence": "verified",
+        "scan_result":"TP",
         "note": "wyzwalane są jednakowe rule_id jak dla EC2.2"
       },
       "trivy": {
         "rule_id": "AWS-0178",
         "resource": "aws_vpc",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "kics": {
         "rule_id": "f83121ea-03da-434f-9277-9cd247ab3047",
         "query_name": "VPC Flow Logs Disabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "prowler": {
-        "check_id": "ec2_vpc_flow_logs_enabled",
+        "check_id": null,
         "confidence": "To be verified"
       }
     },
@@ -1132,20 +1325,25 @@
       "checkov": {
         "rule_id": "CKV_AWS_106",
         "resource": "aws_ebs_encryption_by_default",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
+        
       },
       "trivy": {
         "rule_id": null,
         "resource": "aws_ebs_encryption_by_default",
-        "confidence": "not applicable"
+        "confidence": "not applicable",
+        "scan_result":"FN",
+        "scan_result_reason":"no_check_in_tool"
       },
       "kics": {
         "rule_id": "3d3f6270-546b-443c-adb4-bb6fb2187ca6",
         "query_name": "EBS Default Encryption Disabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       },
       "prowler": {
-        "check_id": "ec2_ebs_default_encryption_enabled",
+        "check_id": null,
         "confidence": "To be verified"
       }
     },
@@ -1166,12 +1364,14 @@
         ],
         "resource": "aws_network_acl_rule",
         "confidence": "verified",
+        "scan_result":"TP",
         "note": "Również wyzwala rule id jak dla EC2.2 i EC2.6 (CKV2_AWS_(11/12)"
       },
       "trivy": {
         "rule_id": "AWS-0105",
         "resource": "aws_network_acl_rule",
         "confidence": "verified",
+        "scan_result":"TP",
         "note": "AWS-0105 występuje 2 razy: Dla SSH i RDP"
       },
       "kics": {
@@ -1181,39 +1381,16 @@
         ],
         "query_name": "NACL Allows Ingress From 0.0.0.0/0 To SSH Or RDP",
         "confidence": "verified",
+        "scan_result":"TP",
         "note": "a20b.. Network ACL With Unrestricted Access To RDP i 3af7 Network ACL With Unrestricted Access To SSH pojawiają się w base ale dokłladnie pasują do kontroli"
       },
       "prowler": {
-        "check_id": "ec2_networkacl_allow_ingress_any_port",
+        "check_id": null,
         "confidence": "To be verified"
       }
     }
   ],
-  "summary": {
-    "total_controls": 35,
-    "by_section": {
-      "IAM": 7,
-      "S3": 4,
-      "Logging": 8,
-      "Monitoring": 12,
-      "Networking": 4
-    },
-    "by_iac_testability": {
-      "fully_testable": 31,
-      "not_testable": 4
-    },
-    "by_confidence": {
-      "verified": 18,
-      "partial": 14,
-      "requires_verification": 19
-    },
-    "requires_verification_count": {
-      "Checkov": 0,
-      "Trivy": 0,
-      "KICS": 0,
-      "Prowler": 0
-    }
-  },
+  
   "verification_instructions": {
     "description": "To resolve CHANGE_ placeholders, run each tool against a deliberately vulnerable Terraform file and inspect JSON output for matching rule IDs.",
     "checkov": "checkov -d ./terraform_scenarios --output json | jq '.results.failed_checks[] | {check_id, resource}'",
