@@ -1,0 +1,6 @@
+{
+  "cis_id": "IAM.3",
+  "iac_testable": false,
+  "iac_limitation": "Operational state — key rotation age cannot be determined from Terraform code",
+  "ground_truth": "FAIL"
+}

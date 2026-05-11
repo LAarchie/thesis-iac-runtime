@@ -1,0 +1,6 @@
+{
+  "cis_id": "IAM.22",
+  "iac_testable": false,
+  "iac_limitation": "Operational state — last used date cannot be determined from Terraform code",
+  "ground_truth": "FAIL"
+}
