@@ -196,7 +196,7 @@
         "check_id": "iam_rotate_access_key_90_days",
         "confidence": "verified",
         "scan_result": "FN",
-        "scan_result_reason": "Narzedzie zwrocilo PASS ze wzgledu na nower uwierzytelnienie - brak starych kluczy"
+        "scan_result_reason": "Narzedzie zwrocilo PASS ze wzgledu na nowe uwierzytelnienie - brak starych kluczy"
       }
     },
     {
@@ -1367,8 +1367,8 @@
         ],
         "resource": "aws_network_acl_rule",
         "confidence": "verified",
-        "scan_result":"TP",
-        "note": "Również wyzwala rule id jak dla EC2.2 i EC2.6 (CKV2_AWS_(11/12)"
+        "scan_result":"TP"
+        
       },
       "trivy": {
         "rule_id": "AWS-0105",
