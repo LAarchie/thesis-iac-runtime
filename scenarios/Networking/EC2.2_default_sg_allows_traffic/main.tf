@@ -1,16 +1,28 @@
-# EC2.2, EC2.6, EC2.21 — VPC required
-resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
+data "aws_vpc" "default" {
+  default = true
+}
 
+# EC2.2 — VULNERABLE: default security group allows all traffic
+resource "aws_default_security_group" "cis" {
+  vpc_id = data.aws_vpc.default.id
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   tags = {
-    Name       = "cis-vpc"
     Standard   = "CIS-AWS-1.4.0"
-    SScenario   = "vulnerable"
+    Scenario   = "vulnerable"
     ResearchID = "EC2.2"
   }
 }
-
-# EC2.2 No security group - VOULNERABLE
 
 # EC2.6 — VPC flow logs enabled
 resource "aws_cloudwatch_log_group" "flow_logs" {
@@ -19,8 +31,8 @@ resource "aws_cloudwatch_log_group" "flow_logs" {
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.2"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 
@@ -37,8 +49,8 @@ resource "aws_iam_role" "flow_logs" {
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.2"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 
@@ -62,15 +74,15 @@ resource "aws_iam_role_policy" "flow_logs" {
 }
 
 resource "aws_flow_log" "main" {
-  vpc_id          = aws_vpc.main.id
+  vpc_id          = data.aws_vpc.default.id
   traffic_type    = "ALL"
   iam_role_arn    = aws_iam_role.flow_logs.arn
   log_destination = aws_cloudwatch_log_group.flow_logs.arn
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.2"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 
@@ -81,12 +93,12 @@ resource "aws_ebs_encryption_by_default" "main" {
 
 # EC2.21 — NACL denies unrestricted SSH and RDP from 0.0.0.0/0
 resource "aws_network_acl" "main" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = data.aws_vpc.default.id
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.2"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 

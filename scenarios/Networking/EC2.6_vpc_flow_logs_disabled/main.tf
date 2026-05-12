@@ -1,8 +1,8 @@
-# EC2.2, EC2.6, EC2.21 — VPC required
+# EC2.6 — VULNERABLE: VPC without flow logs enabled
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
 
- tags = {
+  tags = {
     Name       = "cis-vpc"
     Standard   = "CIS-AWS-1.4.0"
     Scenario   = "vulnerable"
@@ -10,45 +10,11 @@ resource "aws_vpc" "main" {
   }
 }
 
-# EC2.6 Removed aws_log_flow and aws_cloudwatch_log_group resources
-
-resource "aws_iam_role" "flow_logs" {
-  name = "cis-vpc-flow-logs-role"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [{
-      Effect    = "Allow"
-      Principal = { Service = "vpc-flow-logs.amazonaws.com" }
-      Action    = "sts:AssumeRole"
-    }]
-  })
-
-  tags = {
-    Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.6"
-  }
+# EC2.2 — default security group has no inbound/outbound rules
+resource "aws_default_security_group" "main" {
+  vpc_id = aws_vpc.main.id
+  # No ingress or egress blocks = no traffic allowed
 }
-
-resource "aws_iam_role_policy" "flow_logs" {
-  name = "cis-vpc-flow-logs-policy"
-  role = aws_iam_role.flow_logs.id
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [{
-      Effect = "Allow"
-      Action = [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents",
-        "logs:DescribeLogGroups",
-        "logs:DescribeLogStreams"
-      ]
-      Resource = "*"
-    }]
-  })
-}
-
 
 # EC2.7 — EBS encryption by default enabled
 resource "aws_ebs_encryption_by_default" "main" {
@@ -61,8 +27,8 @@ resource "aws_network_acl" "main" {
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.6"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 

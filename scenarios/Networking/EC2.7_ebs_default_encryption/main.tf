@@ -5,8 +5,8 @@ resource "aws_vpc" "main" {
   tags = {
     Name       = "cis-vpc"
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.7"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 
@@ -21,10 +21,10 @@ resource "aws_cloudwatch_log_group" "flow_logs" {
   name              = "/cis/vpc-flow-logs"
   retention_in_days = 90
 
- tags = {
+  tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.7"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 
@@ -41,8 +41,8 @@ resource "aws_iam_role" "flow_logs" {
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.7"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 
@@ -73,12 +73,12 @@ resource "aws_flow_log" "main" {
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.7"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 
-# EC2.7 — EBS encryption disabled
+# EC2.7 — VULNERABLE: EBS default encryption disabled
 resource "aws_ebs_encryption_by_default" "main" {
   enabled = false
 }
@@ -89,8 +89,8 @@ resource "aws_network_acl" "main" {
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.7"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 

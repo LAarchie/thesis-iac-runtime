@@ -5,8 +5,8 @@ resource "aws_vpc" "main" {
   tags = {
     Name       = "cis-vpc"
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.21"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 
@@ -21,10 +21,10 @@ resource "aws_cloudwatch_log_group" "flow_logs" {
   name              = "/cis/vpc-flow-logs"
   retention_in_days = 90
 
-   tags = {
+  tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.21"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 
@@ -39,10 +39,10 @@ resource "aws_iam_role" "flow_logs" {
     }]
   })
 
-   tags = {
+  tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.21"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 
@@ -71,10 +71,10 @@ resource "aws_flow_log" "main" {
   iam_role_arn    = aws_iam_role.flow_logs.arn
   log_destination = aws_cloudwatch_log_group.flow_logs.arn
 
-   tags = {
+  tags = {
     Standard   = "CIS-AWS-1.4.0"
-    Scenario   = "vulnerable"
-    ResearchID = "EC2.21"
+    Scenario   = "compliant"
+    ResearchID = "Networking"
   }
 }
 
@@ -87,15 +87,15 @@ resource "aws_ebs_encryption_by_default" "main" {
 resource "aws_network_acl" "main" {
   vpc_id = aws_vpc.main.id
 
-   tags = {
+  tags = {
     Standard   = "CIS-AWS-1.4.0"
     Scenario   = "vulnerable"
     ResearchID = "EC2.21"
   }
 }
 
-# EC2.21 Allow SSH
-resource "aws_network_acl_rule" "deny_ssh" {
+# EC2.21 — VULNERABLE: NACL allows ingress from 0.0.0.0/0 to SSH and RDP
+resource "aws_network_acl_rule" "allow_ssh" {
   network_acl_id = aws_network_acl.main.id
   rule_number    = 100
   protocol       = "tcp"
@@ -105,8 +105,7 @@ resource "aws_network_acl_rule" "deny_ssh" {
   to_port        = 22
 }
 
-# EC2.21 Allow RDP
-resource "aws_network_acl_rule" "deny_rdp" {
+resource "aws_network_acl_rule" "allow_rdp" {
   network_acl_id = aws_network_acl.main.id
   rule_number    = 110
   protocol       = "tcp"
