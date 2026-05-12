@@ -1310,7 +1310,8 @@
       "prowler": {
         "check_id": "vpc_flow_logs_enabled",
         "confidence": "verified",
-        "Note": "Not compliant with CIS 1.4.0, checked manually"
+        "Note": "Not compliant with CIS 1.4.0, checked manually",
+        "scan_result": "TP"
       }
     },
     {
