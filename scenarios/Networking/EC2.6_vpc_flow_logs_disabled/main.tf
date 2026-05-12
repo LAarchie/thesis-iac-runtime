@@ -1,7 +1,27 @@
-
-# EC2.6 — VULNERABLE: VPC bez Flow Logs
-resource "aws_vpc" "cis" {
+# EC2.2, EC2.6, EC2.21 — VPC required
+resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
+
+ tags = {
+    Name       = "cis-vpc"
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "vulnerable"
+    ResearchID = "EC2.6"
+  }
+}
+
+# EC2.6 Removed aws_log_flow and aws_cloudwatch_log_group resources
+
+resource "aws_iam_role" "flow_logs" {
+  name = "cis-vpc-flow-logs-role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect    = "Allow"
+      Principal = { Service = "vpc-flow-logs.amazonaws.com" }
+      Action    = "sts:AssumeRole"
+    }]
+  })
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
@@ -10,5 +30,58 @@ resource "aws_vpc" "cis" {
   }
 }
 
-# Brak aws_flow_log — to jest celowa podatność
-# aws_flow_log jest zdefiniowany w _base ale tutaj go nie ma
+resource "aws_iam_role_policy" "flow_logs" {
+  name = "cis-vpc-flow-logs-policy"
+  role = aws_iam_role.flow_logs.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Action = [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogGroups",
+        "logs:DescribeLogStreams"
+      ]
+      Resource = "*"
+    }]
+  })
+}
+
+
+# EC2.7 — EBS encryption by default enabled
+resource "aws_ebs_encryption_by_default" "main" {
+  enabled = true
+}
+
+# EC2.21 — NACL denies unrestricted SSH and RDP from 0.0.0.0/0
+resource "aws_network_acl" "main" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "vulnerable"
+    ResearchID = "EC2.6"
+  }
+}
+
+resource "aws_network_acl_rule" "deny_ssh" {
+  network_acl_id = aws_network_acl.main.id
+  rule_number    = 100
+  protocol       = "tcp"
+  rule_action    = "deny"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 22
+  to_port        = 22
+}
+
+resource "aws_network_acl_rule" "deny_rdp" {
+  network_acl_id = aws_network_acl.main.id
+  rule_number    = 110
+  protocol       = "tcp"
+  rule_action    = "deny"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 3389
+  to_port        = 3389
+}
