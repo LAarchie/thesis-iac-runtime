@@ -2,9 +2,42 @@ data "aws_vpc" "default" {
   default = true
 }
 
-# EC2.2 — VULNERABLE: default security group allows all traffic
+# EC2.2 — VULNERABLE: default security group allows all traffic (Prowler)
 resource "aws_default_security_group" "cis" {
   vpc_id = data.aws_vpc.default.id
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "vulnerable"
+    ResearchID = "EC2.2"
+  }
+}
+
+# EC2.2 — VPC for Checkov shift-left scanning
+resource "aws_vpc" "main" {
+  cidr_block = "10.0.0.0/16"
+
+  tags = {
+    Standard   = "CIS-AWS-1.4.0"
+    Scenario   = "vulnerable"
+    ResearchID = "EC2.2"
+  }
+}
+
+# EC2.2 — VULNERABLE: default security group allows all traffic (Checkov CKV2_AWS_12)
+resource "aws_default_security_group" "main" {
+  vpc_id = aws_vpc.main.id
   ingress {
     from_port   = 0
     to_port     = 0
@@ -74,7 +107,7 @@ resource "aws_iam_role_policy" "flow_logs" {
 }
 
 resource "aws_flow_log" "main" {
-  vpc_id          = data.aws_vpc.default.id
+  vpc_id          = aws_vpc.main.id
   traffic_type    = "ALL"
   iam_role_arn    = aws_iam_role.flow_logs.arn
   log_destination = aws_cloudwatch_log_group.flow_logs.arn
@@ -93,7 +126,7 @@ resource "aws_ebs_encryption_by_default" "main" {
 
 # EC2.21 — NACL denies unrestricted SSH and RDP from 0.0.0.0/0
 resource "aws_network_acl" "main" {
-  vpc_id = data.aws_vpc.default.id
+  vpc_id = aws_vpc.main.id
 
   tags = {
     Standard   = "CIS-AWS-1.4.0"
