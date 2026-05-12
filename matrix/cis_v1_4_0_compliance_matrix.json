@@ -715,7 +715,8 @@
       },
       "prowler": {
         "check_id": "config_recorder_all_regions_enabled",
-        "confidence": "verified"
+        "confidence": "verified",
+        "scan_result":"TP"
       }
     },
     {
@@ -1247,7 +1248,7 @@
         "rule_id": "CKV2_AWS_12",
         "resource": "aws_default_security_group",
         "confidence": "verified",
-        "scan_result": "FN"
+        "scan_result": "TP"
       },
       "trivy": {
         "rule_id": [
