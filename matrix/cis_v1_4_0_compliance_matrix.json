@@ -1247,7 +1247,7 @@
         "rule_id": "CKV2_AWS_12",
         "resource": "aws_default_security_group",
         "confidence": "verified",
-        "note": "CKV2_AWS_11 | Ensure VPC flow logging is enabled in all VPCs - też jest wywoływane w scenariuszu EC2.2"
+        "scan_result": "FN"
       },
       "trivy": {
         "rule_id": [
@@ -1256,8 +1256,7 @@
         ],
         "resource": "aws_default_security_group",
         "confidence": "verified",
-        "scan_result":"TP",
-        "note": "AWS-0124 | Missing description for security group rule, AWS-0178 | VPC Flow Logs — VPC Flow Logs should be enabled for packet 'Rejects' również wywoływane dla scenariusza EC2.2"
+        "scan_result":"TP"
       },
       "kics": {
         "rule_id": [
@@ -1269,12 +1268,13 @@
         ],
         "confidence": "verified",
         "scan_result":"TP",
-        "note": "f83121ea-03da-434f-9277-9cd247ab3047 VPC FlowLogs Disabled też dla EC2.2 (raczej EC2.6)"
+        "note": "f83121ea-03da-434f-9277-9cd247ab3047"
       },
       "prowler": {
         "check_id": "ec2_securitygroup_default_restrict_traffic",
-        "confidence": "To be verified",
-        "scan_result":"TP"
+        "confidence": "verified",
+        "scan_result":"TP",
+        "Note": "Not compliant with CIS 1.4.0, checked manually"
       }
     },
     {
@@ -1292,8 +1292,7 @@
         "rule_id": "CKV2_AWS_11",
         "resource": "aws_vpc",
         "confidence": "verified",
-        "scan_result":"TP",
-        "note": "wyzwalane są jednakowe rule_id jak dla EC2.2"
+        "scan_result":"TP"
       },
       "trivy": {
         "rule_id": "AWS-0178",
@@ -1308,8 +1307,9 @@
         "scan_result":"TP"
       },
       "prowler": {
-        "check_id": null,
-        "confidence": "To be verified"
+        "check_id": "vpc_flow_logs_enabled",
+        "confidence": "verified",
+        "Note": "Not compliant with CIS 1.4.0, checked manually"
       }
     },
     {
@@ -1343,8 +1343,11 @@
         "scan_result":"TP"
       },
       "prowler": {
-        "check_id": null,
-        "confidence": "To be verified"
+        "check_id": "ec2_ebs_default_encryption",
+        "confidence": "verified",
+        "scan_result": "TP",
+        "Note": "Not compliant with CIS 1.4.0, checked manually"
+
       }
     },
     {
@@ -1385,8 +1388,13 @@
         "note": "a20b.. Network ACL With Unrestricted Access To RDP i 3af7 Network ACL With Unrestricted Access To SSH pojawiają się w base ale dokłladnie pasują do kontroli"
       },
       "prowler": {
-        "check_id": null,
-        "confidence": "To be verified"
+        "check_id": [
+          "ec2_networkacl_allow_ingress_tcp_port_3389",
+          "ec2_networkacl_allow_ingress_tcp_port_22"
+        ],
+        "confidence": "verified",
+        "scan_result": "TP",
+        "Note":"Not compliant with CIS 1.4.0, checked manually"
       }
     }
   ],
