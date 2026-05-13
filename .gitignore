@@ -25,6 +25,7 @@ __pycache__/
 venv/
 *.egg-info/
 .thesis/
+thesis/
 
 # results/
 results/
