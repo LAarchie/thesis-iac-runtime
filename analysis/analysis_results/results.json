@@ -1,0 +1,955 @@
+{
+  "metadata": {
+    "matrix_version": "1.4.0",
+    "generated_at": "2026-05-13T00:43:28.993919+00:00",
+    "set_sizes": {
+      "A": 34,
+      "B_IaC": 31,
+      "B_Runtime": 32
+    },
+    "exclusions": {
+      "all_sets": [
+        "S3.20"
+      ],
+      "B_IaC_additional": [
+        "IAM.22",
+        "IAM.3",
+        "IAM.5"
+      ],
+      "B_Runtime_additional": [
+        "IAM.22",
+        "IAM.3"
+      ]
+    }
+  },
+  "recall_overall": {
+    "checkov": {
+      "A": 0.5,
+      "B_IaC": 0.5484
+    },
+    "trivy": {
+      "A": 0.4118,
+      "B_IaC": 0.4516
+    },
+    "kics": {
+      "A": 0.4706,
+      "B_IaC": 0.5161
+    },
+    "prowler": {
+      "A": 0.9118,
+      "B_Runtime": 0.9688
+    },
+    "shiftleft_any": {
+      "A": 0.5294,
+      "B_IaC": 0.5806
+    }
+  },
+  "recall_by_section": {
+    "IAM": {
+      "checkov": {
+        "A": 0.2857,
+        "B_IaC": 0.5,
+        "tp": 2,
+        "fn": 5,
+        "excluded": 0
+      },
+      "trivy": {
+        "A": 0.2857,
+        "B_IaC": 0.5,
+        "tp": 2,
+        "fn": 5,
+        "excluded": 0
+      },
+      "kics": {
+        "A": 0.4286,
+        "B_IaC": 0.75,
+        "tp": 3,
+        "fn": 4,
+        "excluded": 0
+      },
+      "prowler": {
+        "A": 0.7143,
+        "B_Runtime": 1.0,
+        "tp": 5,
+        "fn": 2,
+        "excluded": 0
+      },
+      "shiftleft_any": {
+        "A": 0.4286,
+        "B_IaC": 0.75,
+        "tp": 3,
+        "fn": 4
+      }
+    },
+    "Logging": {
+      "checkov": {
+        "A": 1.0,
+        "B_IaC": 1.0,
+        "tp": 8,
+        "fn": 0,
+        "excluded": 0
+      },
+      "trivy": {
+        "A": 0.875,
+        "B_IaC": 0.875,
+        "tp": 7,
+        "fn": 1,
+        "excluded": 0
+      },
+      "kics": {
+        "A": 0.875,
+        "B_IaC": 0.875,
+        "tp": 7,
+        "fn": 1,
+        "excluded": 0
+      },
+      "prowler": {
+        "A": 1.0,
+        "B_Runtime": 1.0,
+        "tp": 8,
+        "fn": 0,
+        "excluded": 0
+      },
+      "shiftleft_any": {
+        "A": 1.0,
+        "B_IaC": 1.0,
+        "tp": 8,
+        "fn": 0
+      }
+    },
+    "Monitoring": {
+      "checkov": {
+        "A": 0.0,
+        "B_IaC": 0.0,
+        "tp": 0,
+        "fn": 12,
+        "excluded": 0
+      },
+      "trivy": {
+        "A": 0.0,
+        "B_IaC": 0.0,
+        "tp": 0,
+        "fn": 12,
+        "excluded": 0
+      },
+      "kics": {
+        "A": 0.0,
+        "B_IaC": 0.0,
+        "tp": 0,
+        "fn": 12,
+        "excluded": 0
+      },
+      "prowler": {
+        "A": 1.0,
+        "B_Runtime": 1.0,
+        "tp": 12,
+        "fn": 0,
+        "excluded": 0
+      },
+      "shiftleft_any": {
+        "A": 0.0,
+        "B_IaC": 0.0,
+        "tp": 0,
+        "fn": 12
+      }
+    },
+    "Networking": {
+      "checkov": {
+        "A": 1.0,
+        "B_IaC": 1.0,
+        "tp": 4,
+        "fn": 0,
+        "excluded": 0
+      },
+      "trivy": {
+        "A": 0.75,
+        "B_IaC": 0.75,
+        "tp": 3,
+        "fn": 1,
+        "excluded": 0
+      },
+      "kics": {
+        "A": 1.0,
+        "B_IaC": 1.0,
+        "tp": 4,
+        "fn": 0,
+        "excluded": 0
+      },
+      "prowler": {
+        "A": 1.0,
+        "B_Runtime": 1.0,
+        "tp": 4,
+        "fn": 0,
+        "excluded": 0
+      },
+      "shiftleft_any": {
+        "A": 1.0,
+        "B_IaC": 1.0,
+        "tp": 4,
+        "fn": 0
+      }
+    },
+    "S3": {
+      "checkov": {
+        "A": 1.0,
+        "B_IaC": 1.0,
+        "tp": 3,
+        "fn": 0,
+        "excluded": 0
+      },
+      "trivy": {
+        "A": 0.6667,
+        "B_IaC": 0.6667,
+        "tp": 2,
+        "fn": 1,
+        "excluded": 0
+      },
+      "kics": {
+        "A": 0.6667,
+        "B_IaC": 0.6667,
+        "tp": 2,
+        "fn": 1,
+        "excluded": 0
+      },
+      "prowler": {
+        "A": 0.6667,
+        "B_Runtime": 0.6667,
+        "tp": 2,
+        "fn": 1,
+        "excluded": 0
+      },
+      "shiftleft_any": {
+        "A": 1.0,
+        "B_IaC": 1.0,
+        "tp": 3,
+        "fn": 0
+      }
+    }
+  },
+  "per_control": [
+    {
+      "cis_id": "IAM.1",
+      "section": "IAM",
+      "level": 1,
+      "description": "IAM policies should not allow full '*' administrative privileges",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "FN",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "IAM.15",
+      "section": "IAM",
+      "level": 1,
+      "description": "Ensure IAM password policy requires minimum password length of 14 or greater",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "IAM.16",
+      "section": "IAM",
+      "level": 1,
+      "description": "Ensure IAM password policy prevents password reuse",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "IAM.18",
+      "section": "IAM",
+      "level": 1,
+      "description": "Ensure a support role has been created to manage incidents with AWS Support",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "IAM.3",
+      "section": "IAM",
+      "level": 1,
+      "description": "IAM users' access keys should be rotated every 90 days or less",
+      "in_A": true,
+      "in_B_IaC": false,
+      "in_B_Runtime": false,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "FN"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "IAM.5",
+      "section": "IAM",
+      "level": 1,
+      "description": "MFA should be enabled for all IAM users that have a console password",
+      "in_A": true,
+      "in_B_IaC": false,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "IAM.22",
+      "section": "IAM",
+      "level": 1,
+      "description": "IAM user credentials unused for 45 days should be removed",
+      "in_A": true,
+      "in_B_IaC": false,
+      "in_B_Runtime": false,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "FN"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "S3.1",
+      "section": "S3",
+      "level": 2,
+      "description": "S3 general purpose buckets should have block public access settings enabled",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "S3.5",
+      "section": "S3",
+      "level": 1,
+      "description": "S3 general purpose buckets should require requests to use SSL",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "FN",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "S3.8",
+      "section": "S3",
+      "level": 2,
+      "description": "S3 general purpose buckets should block public access",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "FN",
+        "prowler": "FN"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "CloudTrail.1",
+      "section": "Logging",
+      "level": 1,
+      "description": "CloudTrail should be enabled and configured with at least one multi-Region trail that includes read and write management events",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "CloudTrail.2",
+      "section": "Logging",
+      "level": 2,
+      "description": "CloudTrail should have encryption at-rest enabled",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "CloudTrail.4",
+      "section": "Logging",
+      "level": 2,
+      "description": "CloudTrail log file validation should be enabled",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "CloudTrail.5",
+      "section": "Logging",
+      "level": 1,
+      "description": "CloudTrail trails should be integrated with Amazon CloudWatch Logs",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "CloudTrail.6",
+      "section": "Logging",
+      "level": 1,
+      "description": "Ensure the S3 bucket used to store CloudTrail logs is not publicly accessible",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "CloudTrail.7",
+      "section": "Logging",
+      "level": 2,
+      "description": "Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "Config.1",
+      "section": "Logging",
+      "level": 1,
+      "description": "AWS Config should be enabled and use the service-linked role for resource recording",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "KMS.4",
+      "section": "Logging",
+      "level": 2,
+      "description": "AWS KMS key rotation should be enabled",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "CloudWatch.1",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "A log metric filter and alarm should exist for usage of the 'root' user",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "CloudWatch.4",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for IAM policy changes",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "CloudWatch.5",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for CloudTrail configuration changes",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "CloudWatch.6",
+      "section": "Monitoring",
+      "level": 2,
+      "description": "Ensure a log metric filter and alarm exist for AWS Management Console authentication failures",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "CloudWatch.7",
+      "section": "Monitoring",
+      "level": 2,
+      "description": "Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer managed keys",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "CloudWatch.8",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for S3 bucket policy changes",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "CloudWatch.9",
+      "section": "Monitoring",
+      "level": 2,
+      "description": "Ensure a log metric filter and alarm exist for AWS Config configuration changes",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "CloudWatch.10",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for security group changes",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "CloudWatch.11",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for changes to Network Access Control Lists (NACL)",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "CloudWatch.12",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for changes to network gateways",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "CloudWatch.13",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for route table changes",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "CloudWatch.14",
+      "section": "Monitoring",
+      "level": 1,
+      "description": "Ensure a log metric filter and alarm exist for VPC changes",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "FN",
+        "trivy": "FN",
+        "kics": "FN",
+        "prowler": "TP"
+      },
+      "shiftleft_any": false
+    },
+    {
+      "cis_id": "EC2.2",
+      "section": "Networking",
+      "level": 1,
+      "description": "VPC default security groups should not allow inbound or outbound traffic",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "EC2.6",
+      "section": "Networking",
+      "level": 2,
+      "description": "VPC flow logging should be enabled in all VPCs",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "EC2.7",
+      "section": "Networking",
+      "level": 2,
+      "description": "EBS default encryption should be enabled",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "FN",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    },
+    {
+      "cis_id": "EC2.21",
+      "section": "Networking",
+      "level": 1,
+      "description": "Network ACLs should not allow ingress from 0.0.0.0/0 to port 22 or port 3389",
+      "in_A": true,
+      "in_B_IaC": true,
+      "in_B_Runtime": true,
+      "results": {
+        "checkov": "TP",
+        "trivy": "TP",
+        "kics": "TP",
+        "prowler": "TP"
+      },
+      "shiftleft_any": true
+    }
+  ],
+  "gap_analysis": {
+    "prowler_only": [
+      {
+        "cis_id": "IAM.18",
+        "section": "IAM",
+        "description": "Ensure a support role has been created to manage incidents with AWS Support"
+      },
+      {
+        "cis_id": "IAM.5",
+        "section": "IAM",
+        "description": "MFA should be enabled for all IAM users that have a console password"
+      },
+      {
+        "cis_id": "CloudWatch.1",
+        "section": "Monitoring",
+        "description": "A log metric filter and alarm should exist for usage of the 'root' user"
+      },
+      {
+        "cis_id": "CloudWatch.4",
+        "section": "Monitoring",
+        "description": "Ensure a log metric filter and alarm exist for IAM policy changes"
+      },
+      {
+        "cis_id": "CloudWatch.5",
+        "section": "Monitoring",
+        "description": "Ensure a log metric filter and alarm exist for CloudTrail configuration changes"
+      },
+      {
+        "cis_id": "CloudWatch.6",
+        "section": "Monitoring",
+        "description": "Ensure a log metric filter and alarm exist for AWS Management Console authentication failures"
+      },
+      {
+        "cis_id": "CloudWatch.7",
+        "section": "Monitoring",
+        "description": "Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer managed keys"
+      },
+      {
+        "cis_id": "CloudWatch.8",
+        "section": "Monitoring",
+        "description": "Ensure a log metric filter and alarm exist for S3 bucket policy changes"
+      },
+      {
+        "cis_id": "CloudWatch.9",
+        "section": "Monitoring",
+        "description": "Ensure a log metric filter and alarm exist for AWS Config configuration changes"
+      },
+      {
+        "cis_id": "CloudWatch.10",
+        "section": "Monitoring",
+        "description": "Ensure a log metric filter and alarm exist for security group changes"
+      },
+      {
+        "cis_id": "CloudWatch.11",
+        "section": "Monitoring",
+        "description": "Ensure a log metric filter and alarm exist for changes to Network Access Control Lists (NACL)"
+      },
+      {
+        "cis_id": "CloudWatch.12",
+        "section": "Monitoring",
+        "description": "Ensure a log metric filter and alarm exist for changes to network gateways"
+      },
+      {
+        "cis_id": "CloudWatch.13",
+        "section": "Monitoring",
+        "description": "Ensure a log metric filter and alarm exist for route table changes"
+      },
+      {
+        "cis_id": "CloudWatch.14",
+        "section": "Monitoring",
+        "description": "Ensure a log metric filter and alarm exist for VPC changes"
+      }
+    ],
+    "shiftleft_only": [
+      {
+        "cis_id": "S3.8",
+        "section": "S3",
+        "description": "S3 general purpose buckets should block public access"
+      }
+    ],
+    "both_detect": [
+      {
+        "cis_id": "IAM.1",
+        "section": "IAM",
+        "description": "IAM policies should not allow full '*' administrative privileges"
+      },
+      {
+        "cis_id": "IAM.15",
+        "section": "IAM",
+        "description": "Ensure IAM password policy requires minimum password length of 14 or greater"
+      },
+      {
+        "cis_id": "IAM.16",
+        "section": "IAM",
+        "description": "Ensure IAM password policy prevents password reuse"
+      },
+      {
+        "cis_id": "S3.1",
+        "section": "S3",
+        "description": "S3 general purpose buckets should have block public access settings enabled"
+      },
+      {
+        "cis_id": "S3.5",
+        "section": "S3",
+        "description": "S3 general purpose buckets should require requests to use SSL"
+      },
+      {
+        "cis_id": "CloudTrail.1",
+        "section": "Logging",
+        "description": "CloudTrail should be enabled and configured with at least one multi-Region trail that includes read and write management events"
+      },
+      {
+        "cis_id": "CloudTrail.2",
+        "section": "Logging",
+        "description": "CloudTrail should have encryption at-rest enabled"
+      },
+      {
+        "cis_id": "CloudTrail.4",
+        "section": "Logging",
+        "description": "CloudTrail log file validation should be enabled"
+      },
+      {
+        "cis_id": "CloudTrail.5",
+        "section": "Logging",
+        "description": "CloudTrail trails should be integrated with Amazon CloudWatch Logs"
+      },
+      {
+        "cis_id": "CloudTrail.6",
+        "section": "Logging",
+        "description": "Ensure the S3 bucket used to store CloudTrail logs is not publicly accessible"
+      },
+      {
+        "cis_id": "CloudTrail.7",
+        "section": "Logging",
+        "description": "Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket"
+      },
+      {
+        "cis_id": "Config.1",
+        "section": "Logging",
+        "description": "AWS Config should be enabled and use the service-linked role for resource recording"
+      },
+      {
+        "cis_id": "KMS.4",
+        "section": "Logging",
+        "description": "AWS KMS key rotation should be enabled"
+      },
+      {
+        "cis_id": "EC2.2",
+        "section": "Networking",
+        "description": "VPC default security groups should not allow inbound or outbound traffic"
+      },
+      {
+        "cis_id": "EC2.6",
+        "section": "Networking",
+        "description": "VPC flow logging should be enabled in all VPCs"
+      },
+      {
+        "cis_id": "EC2.7",
+        "section": "Networking",
+        "description": "EBS default encryption should be enabled"
+      },
+      {
+        "cis_id": "EC2.21",
+        "section": "Networking",
+        "description": "Network ACLs should not allow ingress from 0.0.0.0/0 to port 22 or port 3389"
+      }
+    ],
+    "none_detect": [
+      {
+        "cis_id": "IAM.3",
+        "section": "IAM",
+        "description": "IAM users' access keys should be rotated every 90 days or less"
+      },
+      {
+        "cis_id": "IAM.22",
+        "section": "IAM",
+        "description": "IAM user credentials unused for 45 days should be removed"
+      }
+    ]
+  }
+}
